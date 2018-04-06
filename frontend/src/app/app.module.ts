@@ -32,8 +32,11 @@ import { CurrentCapitalCardComponent } from './containers/current-capital-card/c
 import { ReturnCardComponent } from './containers/return-card/return-card.component';
 import { RegistrationState } from './model/registration.state';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { GoalState } from './model/goal.state';
 import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
+import { RegistrationFormState } from './containers/registration-form/registration-form.state';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -66,7 +69,17 @@ const MATERIAL_MODULES = [
     ReturnCardComponent,
     RegistrationFormComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ChartModule, MATERIAL_MODULES, NgxsModule.forRoot([RegistrationState, GoalState])],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ChartModule,
+    MATERIAL_MODULES,
+    NgxsModule.forRoot([RegistrationState, GoalState, RegistrationFormState]),
+    NgxsFormPluginModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

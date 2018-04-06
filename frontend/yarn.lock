@@ -206,6 +206,12 @@
     tree-kill "^1.0.0"
     webpack-sources "^1.1.0"
 
+"@ngxs/form-plugin@^3.0.0-beta.0":
+  version "3.0.0-beta.0"
+  resolved "https://registry.yarnpkg.com/@ngxs/form-plugin/-/form-plugin-3.0.0-beta.0.tgz#149c57262b0f11fc73e7f0e34e5b3dc45f8f52db"
+  dependencies:
+    tslib "^1.7.1"
+
 "@ngxs/store@^3.0.0-beta.0":
   version "3.0.0-beta.0"
   resolved "https://registry.yarnpkg.com/@ngxs/store/-/store-3.0.0-beta.0.tgz#9ac4783fd669f5c5048c2b04589b1217a7ae91f5"

@@ -1,29 +1,29 @@
-<form>
+<form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()" [ngxsForm]="registrationForm">
   <mat-form-field>
-    <input matInput placeholder="Description of your goal">
+    <input matInput placeholder="Description of your goal" formControlName="description">
     <span matPrefix>&nbsp;&nbsp;</span>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Initial deposit" type="number">
+    <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
     <span matPrefix>€&nbsp;</span>
     <span matSuffix>.00</span>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Yearly deposit" type="number">
+    <input matInput placeholder="Annual deposit" type="number" formControlName="annualDeposit">
     <span matPrefix>€&nbsp;</span>
     <span matSuffix>.00</span>
   </mat-form-field>
 
   <mat-form-field>
-    <input matInput placeholder="Target wealth" type="number">
+    <input matInput placeholder="Target wealth" type="number" formControlName="targetWealth">
     <span matPrefix>€&nbsp;</span>
     <span matSuffix>.00</span>
   </mat-form-field>
 
   <mat-form-field>
-    <mat-select placeholder="Target year">
+    <mat-select placeholder="Target year" formControlName="targetYear">
       <mat-option value="2040">2040</mat-option>
       <mat-option value="2041">2041</mat-option>
       <mat-option value="2042">2042</mat-option>
