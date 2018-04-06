@@ -1,10 +1,6 @@
 import { State } from '@ngxs/store';
 
-@State<Registration>({
-  name: 'registration',
-  defaults: new Registration(0, 0, 0)
-})
-export class Registration {
+export class RegistrationStateModel {
   constructor(private _initialWealth: number, private _annualContribution: number, private _targetWealth: number) {}
 
   get initialWealth(): number {
@@ -19,3 +15,9 @@ export class Registration {
     return this._targetWealth;
   }
 }
+
+@State<RegistrationStateModel>({
+  name: 'registration',
+  defaults: new RegistrationStateModel(0, 0, 0)
+})
+export class RegistrationState {}
