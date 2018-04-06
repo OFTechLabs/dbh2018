@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
+const COLOR_LIGHT_BLUE = '#66A8CC';
+
 @Component({
   selector: 'app-return-chart',
   templateUrl: './return-chart.component.html',
@@ -37,17 +39,17 @@ export class ReturnChartComponent implements OnInit {
     xAxis: {
       crosshair: {
         width: 1,
-        color: '#66A8CC'
+        color: COLOR_LIGHT_BLUE
       }
     },
     yAxis: {
       crosshair: {
         width: 1,
-        color: '#66A8CC'
+        color: COLOR_LIGHT_BLUE
       },
       plotLines: [
         {
-          color: '#66A8CC',
+          color: COLOR_LIGHT_BLUE,
           dashStyle: 'ShortDash',
           value: 42,
           width: 3
