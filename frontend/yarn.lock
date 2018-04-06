@@ -220,6 +220,16 @@
     semver "^5.3.0"
     semver-intersect "^1.1.2"
 
+"@types/geojson@*":
+  version "7946.0.2"
+  resolved "https://registry.yarnpkg.com/@types/geojson/-/geojson-7946.0.2.tgz#0bd0a01ef04e813c2b7580318da9e37c2eadea9c"
+
+"@types/highcharts@^5.0.21":
+  version "5.0.21"
+  resolved "https://registry.yarnpkg.com/@types/highcharts/-/highcharts-5.0.21.tgz#9d73d430d5c05f44628e08a4c1e4a0fb95aed3cf"
+  dependencies:
+    "@types/geojson" "*"
+
 "@types/jasmine@*", "@types/jasmine@~2.8.3":
   version "2.8.6"
   resolved "https://registry.yarnpkg.com/@types/jasmine/-/jasmine-2.8.6.tgz#14445b6a1613cf4e05dd61c3c3256d0e95c0421e"
@@ -372,6 +382,10 @@ amqplib@^0.5.2:
     buffer-more-ints "0.0.2"
     readable-stream "1.x >=1.1.9"
     safe-buffer "^5.0.1"
+
+angular-highcharts@^5.2.10:
+  version "5.2.10"
+  resolved "https://registry.yarnpkg.com/angular-highcharts/-/angular-highcharts-5.2.10.tgz#5dcf24d7901915f6746d85750f0fff2b54c4c7ab"
 
 ansi-escapes@^1.0.0:
   version "1.4.0"
@@ -3088,6 +3102,10 @@ hawk@~6.0.2:
 he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
+
+highcharts@^6.0.7:
+  version "6.0.7"
+  resolved "https://registry.yarnpkg.com/highcharts/-/highcharts-6.0.7.tgz#fd5c4f24fdc61a04ae155a5b70830a96c8f70919"
 
 hipchat-notifier@^1.1.0:
   version "1.1.0"
