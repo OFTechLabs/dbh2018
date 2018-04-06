@@ -1,7 +1,26 @@
-<h1>Periscobe</h1>
-<button mat-button color="primary">Primary</button>
-<button mat-button color="accent">Accent</button>
-<button mat-button color="warn">Warn</button>
-<button mat-button disabled>Disabled</button>
+<div class="mat-typography app-container">
+  <mat-sidenav-container>
 
-<router-outlet></router-outlet>
+    <mat-sidenav mode="side" opened="true">
+      <mat-toolbar color="primary">Periscobe</mat-toolbar>
+
+      <mat-nav-list>
+        <a mat-list-item
+           routerLink="/"
+           routerLinkActive="active-link">
+          <mat-icon mat-list-icon>insert_chart</mat-icon>
+          <span>Dashboard</span>
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+
+    <app-toolbar></app-toolbar>
+
+    <div class="main-section">
+      <div class="main-wrapper">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
+
+  </mat-sidenav-container>
+</div>

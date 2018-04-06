@@ -1,1 +1,11 @@
-@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+@import 'variables';
+
+@include mat-core();
+
+$candy-app-primary: mat-palette($mat-blue);
+$candy-app-accent: mat-palette($mat-orange);
+$candy-app-warn: mat-palette($mat-red);
+
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+@include angular-material-theme($candy-app-theme);

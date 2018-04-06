@@ -1,0 +1,48 @@
+@import '../variables';
+
+.mat-nav-list .mat-list-item {
+  color: #555;
+}
+
+.mat-nav-list .mat-list-item.active-link {
+  background: rgba(0, 0, 0, 0.04);
+  color: $primary-700;
+}
+
+.app-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+mat-sidenav {
+  min-width: 200px;
+  box-shadow: 0 2px 1px -1px rgba(0, 0, 0, 0.08), 0px 1px 1px 0px rgba(0, 0, 0, 0.07), 0px 1px 3px 0px rgba(0, 0, 0, 0.14) !important;
+}
+
+mat-sidenav-container {
+  height: 100%;
+  width: 100%;
+}
+
+mat-sidenav-container .mat-drawer-content {
+  overflow: hidden;
+}
+
+.main-section {
+  font-family: $primary-font;
+  overflow: auto;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  top: 64px;
+  padding: 2em;
+}
+
+.main-wrapper {
+  margin: auto;
+  max-width: 1200px;
+}
