@@ -98,6 +98,7 @@ export class ReturnChartComponent implements OnInit, OnChanges {
           width: 1,
           color: COLOR_LIGHT_BLUE
         },
+        tickInterval: 1,
         plotLines: [
           {
             color: COLOR_LIGHT_BLUE,
