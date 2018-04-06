@@ -6,10 +6,13 @@ import { ChartModule } from 'angular-highcharts';
 import {
   MatButtonModule,
   MatCardModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
   MatMenuModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -30,6 +33,7 @@ import { ReturnCardComponent } from './containers/return-card/return-card.compon
 import { RegistrationState } from './model/registration.state';
 import { NgxsModule } from '@ngxs/store';
 import { GoalState } from './model/goal.state';
+import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -40,7 +44,10 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule
 ];
 
 @NgModule({
@@ -56,7 +63,8 @@ const MATERIAL_MODULES = [
     FeasibilityCardComponent,
     GoalCardComponent,
     CurrentCapitalCardComponent,
-    ReturnCardComponent
+    ReturnCardComponent,
+    RegistrationFormComponent
   ],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ChartModule, MATERIAL_MODULES, NgxsModule.forRoot([RegistrationState, GoalState])],
   providers: [],

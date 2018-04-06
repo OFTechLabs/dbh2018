@@ -1,0 +1,36 @@
+<form>
+  <mat-form-field>
+    <input matInput placeholder="Description of your goal">
+    <span matPrefix>&nbsp;&nbsp;</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Initial deposit" type="number">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Yearly deposit" type="number">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <input matInput placeholder="Target wealth" type="number">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-select placeholder="Target year">
+      <mat-option value="2040">2040</mat-option>
+      <mat-option value="2041">2041</mat-option>
+      <mat-option value="2042">2042</mat-option>
+      <mat-option value="2043">2043</mat-option>
+    </mat-select>
+    <span matPrefix>&nbsp;&nbsp;</span>
+  </mat-form-field>
+
+  <button mat-raised-button color="primary">Register</button>
+</form>
