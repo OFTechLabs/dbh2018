@@ -6,8 +6,4 @@ import { BlockchainHttpService } from './blockchain/blockchain.http.service';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss']
 })
-export class AppComponent implements OnInit {
-  ngOnInit(): void {
-    BlockchainHttpService.call();
-  }
-}
+export class AppComponent {}
