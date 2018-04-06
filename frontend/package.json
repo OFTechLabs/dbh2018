@@ -9,7 +9,6 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "format": "prettier {src,e2e}/**/*.{ts,json,scss} --config .prettierrc --write",
     "precommit": "lint-staged"
   },
   "lint-staged": {
