@@ -1,35 +1,35 @@
 pragma solidity ^0.4.20;
 
-import "./SafeMath.sol";
-import "./usingTime.sol";
-import "./usingFloats.sol";
+import "./SafeMath";
+import "./usingTime";
+import "./usingFloats";
 
 contract DynamicStrategy is usingTime, usingFloats {
-	using SafeMath for uint256;
+	using SafeMath for int256;
 	
     struct UserSettings {
     
     	address referenceAddress;
     
-    	uint256 balance;
+    	int256 balance;
     
-    	uint256 t_start;
+    	int256 t_start;
     
-    	uint256 goal;	
-    	uint256 horizon;
+    	int256 goal;	
+    	int256 horizon;
     	
-    	uint256 beta0;
-    	uint256 beta1;
-    	uint256 beta2;
+    	int256 beta0;
+    	int256 beta1;
+    	int256 beta2;
     
-    	uint256 fbonds;
-    	uint256 fstock;
+    	int256 fbonds;
+    	int256 fstock;
     
     }
 
-	uint256 public t_current;
+	int256 public t_current;
 	
-	function setcurrenttime(uint256 time) public returns(bool){
+	function setcurrenttime(int256 time) public returns(bool){
 	    t_current = time;
 	    return true;
 	}
@@ -47,14 +47,14 @@ contract DynamicStrategy is usingTime, usingFloats {
 	mapping(address => UserSettings) public settings;
 	address[] public users;
 
-	uint256 public total_users;
-	uint256 public total_balance;
+	int256 public total_users;
+	int256 public total_balance;
 
-	function DynamicStrategy() {
+	function DynamicStrategy() public {
 		t_current = 2000;
 	}
 
-	function subscribe(uint256 amount, uint256 goal, uint256 horizon, uint256 beta0, uint256 beta1, uint256 beta2) public newuser returns(bool) {
+	function subscribe(int256 amount, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public newuser returns(bool) {
 	    users.push(msg.sender);
 		total_users++;
 		
@@ -67,7 +67,7 @@ contract DynamicStrategy is usingTime, usingFloats {
 		return true;	
 	}
 
-	function deposit(uint256 amount) public existuser returns(bool) {
+	function deposit(int256 amount) public existuser returns(bool) {
 		settings[msg.sender].balance += amount;
 		total_balance += amount;
 		return true;
@@ -75,16 +75,16 @@ contract DynamicStrategy is usingTime, usingFloats {
 
 	function reallocate(address user) public existuser returns(bool) {
 		
-		uint256 t_start = settings[user].t_start;
+		int256 t_start = settings[user].t_start;
 
-		uint256 beta0 = settings[user].beta0;
-		uint256 beta1 = settings[user].beta1;
-		uint256 beta2 = settings[user].beta2;
+		int256 beta0 = settings[user].beta0;
+		int256 beta1 = settings[user].beta1;
+		int256 beta2 = settings[user].beta2;
 
-		uint256 wealth = settings[user].balance;
+		int256 wealth = settings[user].balance;
 
-		uint256 fstock = beta0 + beta1*wealth + beta2*(t_current- t_start);
-		uint256 fbonds = oneFloat - fstock;		
+		int256 fstock = beta0 + beta1*wealth + beta2*(t_current- t_start);
+		int256 fbonds = oneFloat - fstock;		
 
 		require(fstock >= 0);
 		require(fbonds >= 0);
@@ -97,7 +97,7 @@ contract DynamicStrategy is usingTime, usingFloats {
 	}
 	
 	function update() public returns(bool){
-	    for(uint i = 0; i < total_users; i++) {
+	    for(uint256 i = 0; i < uint256(total_users); i++) {
 	        require(reallocate(users[i]));
 	    }
 	    return true;

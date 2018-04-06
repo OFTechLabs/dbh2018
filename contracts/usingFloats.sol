@@ -2,13 +2,13 @@ pragma solidity ^0.4.20;
 
 contract usingFloats {
 
-  function usingFloats() {
+  function usingFloats() public {
     oneFloat = 1000000000;
     minFloat = 1000000; // i.e. 0.001
   }
 
-  uint public oneFloat;
-  uint public minFloat;
+  int public oneFloat;
+  int public minFloat;
 
 }
 
