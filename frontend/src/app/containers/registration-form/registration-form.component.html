@@ -1,36 +1,75 @@
 <form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()" [ngxsForm]="registrationForm">
-  <mat-form-field>
-    <input matInput placeholder="Description of your goal" formControlName="description">
-    <span matPrefix>&nbsp;&nbsp;</span>
-  </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
-    <span matPrefix>€&nbsp;</span>
-    <span matSuffix>.00</span>
-  </mat-form-field>
+  <mat-accordion class="example-headers-align">
+    <mat-expansion-panel [expanded]="step === 0" (opened)="setStep(0)" hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Goal
+        </mat-panel-title>
+        <mat-panel-description>
+          What is your goal?
+          <mat-icon>account_circle</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
 
-  <mat-form-field>
-    <input matInput placeholder="Annual deposit" type="number" formControlName="annualDeposit">
-    <span matPrefix>€&nbsp;</span>
-    <span matSuffix>.00</span>
-  </mat-form-field>
+      <div class="form-fields">
+        <mat-form-field>
+          <input matInput placeholder="Description of your goal" formControlName="description" autofocus>
+          <span matPrefix>&nbsp;&nbsp;</span>
+        </mat-form-field>
 
-  <mat-form-field>
-    <input matInput placeholder="Target wealth" type="number" formControlName="targetWealth">
-    <span matPrefix>€&nbsp;</span>
-    <span matSuffix>.00</span>
-  </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Target wealth" type="number" formControlName="targetWealth">
+          <span matPrefix>€&nbsp;</span>
+          <span matSuffix>.00</span>
+        </mat-form-field>
 
-  <mat-form-field>
-    <mat-select placeholder="Target year" formControlName="targetYear">
-      <mat-option value="2040">2040</mat-option>
-      <mat-option value="2041">2041</mat-option>
-      <mat-option value="2042">2042</mat-option>
-      <mat-option value="2043">2043</mat-option>
-    </mat-select>
-    <span matPrefix>&nbsp;&nbsp;</span>
-  </mat-form-field>
+        <mat-form-field>
+          <mat-select placeholder="Target year" formControlName="targetYear">
+            <mat-option value="2040">2040</mat-option>
+            <mat-option value="2041">2041</mat-option>
+            <mat-option value="2042">2042</mat-option>
+            <mat-option value="2043">2043</mat-option>
+          </mat-select>
+          <span matPrefix>&nbsp;&nbsp;</span>
+        </mat-form-field>
+      </div>
 
-  <button mat-raised-button color="primary">Register</button>
+      <mat-action-row>
+        <button mat-button color="primary" (click)="nextStep()">Next</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+    <mat-expansion-panel [expanded]="step === 1" (opened)="setStep(1)" hideToggle="true">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          Deposits
+        </mat-panel-title>
+        <mat-panel-description>
+          How much would you like to deposit?
+          <mat-icon>attach_money</mat-icon>
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+
+      <div class="form-fields">
+        <mat-form-field>
+          <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
+          <span matPrefix>€&nbsp;</span>
+          <span matSuffix>.00</span>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Annual deposit" type="number" formControlName="annualDeposit">
+          <span matPrefix>€&nbsp;</span>
+          <span matSuffix>.00</span>
+        </mat-form-field>
+      </div>
+      <mat-action-row>
+        <button mat-button color="warn" (click)="prevStep()">Previous</button>
+        <button mat-raised-button color="primary">Register</button>
+      </mat-action-row>
+    </mat-expansion-panel>
+
+  </mat-accordion>
+
 </form>

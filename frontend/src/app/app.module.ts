@@ -6,6 +6,7 @@ import { ChartModule } from 'angular-highcharts';
 import {
   MatButtonModule,
   MatCardModule,
+  MatExpansionModule,
   MatFormFieldModule,
   MatIconModule,
   MatInputModule,
@@ -50,7 +51,8 @@ const MATERIAL_MODULES = [
   MatCardModule,
   MatFormFieldModule,
   MatInputModule,
-  MatSelectModule
+  MatSelectModule,
+  MatExpansionModule
 ];
 
 @NgModule({

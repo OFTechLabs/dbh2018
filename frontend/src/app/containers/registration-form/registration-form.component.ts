@@ -15,6 +15,20 @@ export class RegistrationFormComponent implements OnInit {
     targetYear: null
   });
 
+  step = 0;
+
+  setStep(index: number) {
+    this.step = index;
+  }
+
+  nextStep() {
+    this.step++;
+  }
+
+  prevStep() {
+    this.step--;
+  }
+
   constructor(private formBuilder: FormBuilder) {}
 
   ngOnInit() {}
