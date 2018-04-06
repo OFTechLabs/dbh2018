@@ -18,6 +18,7 @@ import {
 } from '@angular/material';
 import { ToolbarComponent } from './toolbar/toolbar.component';
 import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
+import { RegistrationPageComponent } from './registration-page/registration-page.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -32,7 +33,7 @@ const MATERIAL_MODULES = [
 ];
 
 @NgModule({
-  declarations: [AppComponent, ToolbarComponent, DashboardPageComponent],
+  declarations: [AppComponent, ToolbarComponent, DashboardPageComponent, RegistrationPageComponent],
   imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, MATERIAL_MODULES],
   providers: [],
   bootstrap: [AppComponent]
