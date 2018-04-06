@@ -65,6 +65,11 @@ export class ReturnChartComponent implements OnInit, OnChanges {
           pointStart: this.contractStartYear
         }
       },
+      tooltip: {
+        shared: true,
+        valueDecimals: 0,
+        valuePrefix: '€'
+      },
       credits: {
         enabled: false
       },
@@ -74,7 +79,7 @@ export class ReturnChartComponent implements OnInit, OnChanges {
       series: [
         {
           type: 'areaspline',
-          name: 'Return',
+          name: 'Realization',
           data: realizationLine
         },
         {
