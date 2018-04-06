@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { BlockchainHttpService } from '../../blockchain/blockchain.http.service';
 
 @Component({
   selector: 'app-registration-form',
@@ -19,7 +20,8 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {
-    console.log(this.registrationForm);
+  async onSubmit() {
+    const year = await BlockchainHttpService.getYear();
+    console.log(year);
   }
 }

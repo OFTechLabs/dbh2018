@@ -7,18 +7,18 @@
   grid-auto-columns: 1fr;
 }
 
-app-goal-card {
+.goal {
   grid-area: goal;
 }
 
-app-feasibility-card {
+.feasibility {
   grid-area: feasibility;
 }
 
-app-current-capital-card {
+.current-capital {
   grid-area: current-capital;
 }
 
-app-return-card {
+.return {
   grid-area: return;
 }
