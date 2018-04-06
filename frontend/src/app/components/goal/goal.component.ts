@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, Input, OnInit } from '@angular/core';
-import { Goal } from '../../model/goal';
+import { GoalStateModel } from '../../model/goal.state';
 
 const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
@@ -10,7 +10,7 @@ const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'Jul
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class GoalComponent implements OnInit {
-  @Input() goal: Goal;
+  @Input() goal: GoalStateModel;
 
   constructor() {}
 

@@ -27,8 +27,9 @@ import { FeasibilityCardComponent } from './containers/feasibility-card/feasibil
 import { GoalCardComponent } from './containers/goal-card/goal-card.component';
 import { CurrentCapitalCardComponent } from './containers/current-capital-card/current-capital-card.component';
 import { ReturnCardComponent } from './containers/return-card/return-card.component';
-import { Registration } from './model/registration';
+import { RegistrationState } from './model/registration.state';
 import { NgxsModule } from '@ngxs/store';
+import { GoalState } from './model/goal.state';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -57,7 +58,7 @@ const MATERIAL_MODULES = [
     CurrentCapitalCardComponent,
     ReturnCardComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ChartModule, MATERIAL_MODULES, NgxsModule.forRoot([Registration])],
+  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ChartModule, MATERIAL_MODULES, NgxsModule.forRoot([RegistrationState, GoalState])],
   providers: [],
   bootstrap: [AppComponent]
 })
