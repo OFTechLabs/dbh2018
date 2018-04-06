@@ -17,16 +17,16 @@ import {
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { DashboardPageComponent } from './dashboard-page/dashboard-page.component';
-import { RegistrationPageComponent } from './registration-page/registration-page.component';
+import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
+import { RegistrationPageComponent } from './containers/registration-page/registration-page.component';
 import { ReturnChartComponent } from './components/return-chart/return-chart.component';
 import { CurrentCapitalComponent } from './components/current-capital/current-capital.component';
 import { GoalComponent } from './components/goal/goal.component';
 import { FeasibilityComponent } from './components/feasibility/feasibility.component';
-import { FeasibilityCardComponent } from './components/feasibility-card/feasibility-card.component';
-import { GoalCardComponent } from './components/goal-card/goal-card.component';
-import { CurrentCapitalCardComponent } from './components/current-capital-card/current-capital-card.component';
-import { ReturnCardComponent } from './components/return-card/return-card.component';
+import { FeasibilityCardComponent } from './containers/feasibility-card/feasibility-card.component';
+import { GoalCardComponent } from './containers/goal-card/goal-card.component';
+import { CurrentCapitalCardComponent } from './containers/current-capital-card/current-capital-card.component';
+import { ReturnCardComponent } from './containers/return-card/return-card.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,

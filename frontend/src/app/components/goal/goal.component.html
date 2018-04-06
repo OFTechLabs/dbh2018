@@ -1,3 +1,4 @@
-<p>
-  goal works!
-</p>
+<div>
+  I want to have <span class="target-amount">{{goal.targetAmount | currency:'EUR':'symbol':'2.0-0'}}</span> in
+  <span class="target-date">{{getMonthName(goal.targetMonth)}} {{goal.targetYear}}</span> for <span class="description">{{goal.description}}</span>
+</div>

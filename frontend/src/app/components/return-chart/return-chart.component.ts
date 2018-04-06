@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import { Chart } from 'angular-highcharts';
 
 const COLOR_LIGHT_BLUE = '#66A8CC';
@@ -6,7 +6,8 @@ const COLOR_LIGHT_BLUE = '#66A8CC';
 @Component({
   selector: 'app-return-chart',
   templateUrl: './return-chart.component.html',
-  styleUrls: ['./return-chart.component.scss']
+  styleUrls: ['./return-chart.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class ReturnChartComponent implements OnInit {
   chart = new Chart({
