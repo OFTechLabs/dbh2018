@@ -1,0 +1,24 @@
+.wrapper {
+  display: grid;
+  grid-gap: 10px;
+}
+
+.a {
+  grid-column: 1 / 1;
+  grid-row: 1;
+}
+
+.b {
+  grid-column: 2 / 2;
+  grid-row: 1;
+}
+
+.c {
+  grid-column: 3 /3;
+  grid-row: 1;
+}
+
+.d {
+  grid-column: 1 / 4;
+  grid-row: 2;
+}
