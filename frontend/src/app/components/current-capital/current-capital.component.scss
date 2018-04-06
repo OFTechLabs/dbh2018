@@ -1,3 +1,9 @@
-.current-capital {
-  font-size: 4em;
+@import '../../../variables';
+
+div {
+  font-size: 1.3em;
+}
+
+span {
+  color: $ortec-blue;
 }

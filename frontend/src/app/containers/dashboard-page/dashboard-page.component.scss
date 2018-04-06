@@ -1,24 +1,24 @@
 .wrapper {
   display: grid;
   grid-gap: 10px;
+  grid-template-areas:
+    'goal feasibility current-capital'
+    'return return return';
+  grid-auto-columns: 1fr;
 }
 
-.a {
-  grid-column: 1;
-  grid-row: 1;
+app-goal-card {
+  grid-area: goal;
 }
 
-.b {
-  grid-column: 2;
-  grid-row: 1;
+app-feasibility-card {
+  grid-area: feasibility;
 }
 
-.c {
-  grid-column: 3;
-  grid-row: 1;
+app-current-capital-card {
+  grid-area: current-capital;
 }
 
-.d {
-  grid-column: 1 / 4;
-  grid-row: 2;
+app-return-card {
+  grid-area: return;
 }
