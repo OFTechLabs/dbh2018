@@ -1,31 +1,24 @@
-@import '../../../variables';
-
 .wrapper {
   display: grid;
   grid-gap: 10px;
-  grid-template-areas:
-    'goal feasibility current-capital'
-    'return return return';
-  grid-auto-columns: 1fr;
 }
 
-.goal {
-  grid-area: goal;
+.a {
+  grid-column: 1;
+  grid-row: 1;
 }
 
-.feasibility {
-  grid-area: feasibility;
+.b {
+  grid-column: 2;
+  grid-row: 1;
 }
 
-.current-capital {
-  grid-area: current-capital;
+.c {
+  grid-column: 3;
+  grid-row: 1;
 }
 
-.return {
-  grid-area: return;
-}
-
-.small {
-  color: white;
-  background-color: $ortec-blue;
+.d {
+  grid-column: 1 / 4;
+  grid-row: 2;
 }
