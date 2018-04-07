@@ -7,7 +7,7 @@ export class BlockchainHttpService {
 
   public static getContractInstance() {
     if (BlockchainHttpService.web3.eth.defaultAccount === null || BlockchainHttpService.web3.eth.defaultAccount === undefined) {
-      BlockchainHttpService.web3.eth.defaultAccount = '0x00a329c0648769A73afAc7F9381E08FB43dBEA72';
+      BlockchainHttpService.web3.eth.defaultAccount = '0x731a10897d267e19B34503aD902d0A29173Ba4B1';
     }
     return BlockchainHttpService.contractInstance;
   }
@@ -16,16 +16,16 @@ export class BlockchainHttpService {
     return await BlockchainHttpService.getContractInstance().subscribe([amount, goal, horizon, beta0, beta1, beta2]);
   }
 
-  public static async setcurrenttime(time: number): Promise<boolean> {
-    return await BlockchainHttpService.getContractInstance().setcurrenttime([time]);
+  public static async setcurrenttime(year: number): Promise<boolean> {
+    return await BlockchainHttpService.getContractInstance().setcurrenttime([year]);
   }
 
   public static async users(input: number): Promise<any> {
     return await BlockchainHttpService.getContractInstance().users([input]);
   }
 
-  public static async reallocate(userAddress: string): Promise<boolean> {
-    return await BlockchainHttpService.getContractInstance().reallocate([userAddress]);
+  public static async update(): Promise<boolean> {
+    return await BlockchainHttpService.getContractInstance().update([]);
   }
 
   public static async totalBalance(): Promise<number> {

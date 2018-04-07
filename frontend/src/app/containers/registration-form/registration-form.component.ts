@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
+import { Store } from '@ngxs/store';
+import { RegisterAction } from '../../model/registration.action';
+import 'rxjs/add/operator/map';
 
 @Component({
   selector: 'app-registration-form',
@@ -17,7 +20,7 @@ export class RegistrationFormComponent implements OnInit {
 
   years: number[] = [];
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private store: Store) {
     for (let i = 2019; i <= 2058; i++) {
       this.years.push(i);
     }
@@ -25,5 +28,12 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  onSubmit() {}
+  onSubmit() {
+    this.store
+      .selectOnce(state => state.registrationstate)
+      .map(selected => {
+        this.store.dispatch(new RegisterAction(selected));
+      })
+      .subscribe();
+  }
 }
