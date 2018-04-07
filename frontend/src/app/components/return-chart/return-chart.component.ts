@@ -63,6 +63,9 @@ export class ReturnChartComponent implements OnInit, OnChanges {
             enabled: false
           },
           pointStart: this.contractStartYear
+        },
+        spline: {
+          dashStyle: 'ShortDash'
         }
       },
       tooltip: {
@@ -80,7 +83,8 @@ export class ReturnChartComponent implements OnInit, OnChanges {
         {
           type: 'areaspline',
           name: 'Realization',
-          data: realizationLine
+          data: realizationLine,
+          zIndex: 99
         },
         {
           type: 'spline',
@@ -107,9 +111,8 @@ export class ReturnChartComponent implements OnInit, OnChanges {
         plotLines: [
           {
             color: COLOR_LIGHT_BLUE,
-            dashStyle: 'ShortDash',
             value: this.currentYear,
-            width: 3,
+            width: 2,
             label: {
               text: 'Today',
               style: { color: COLOR_LIGHT_BLUE }
@@ -125,9 +128,8 @@ export class ReturnChartComponent implements OnInit, OnChanges {
         plotLines: [
           {
             color: COLOR_LIGHT_BLUE,
-            dashStyle: 'ShortDash',
             value: this.targetAmount,
-            width: 3,
+            width: 2,
             label: {
               text: 'Goal',
               style: { color: COLOR_LIGHT_BLUE }
