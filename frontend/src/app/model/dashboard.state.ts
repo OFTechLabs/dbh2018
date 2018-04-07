@@ -38,9 +38,9 @@ export class DashboardState {
     const settings = await this.blockchainHttpService.settings(1);
 
     const newUserModel = new DasboardUserModel(
-      '',
-      0,
-      0,
+      action.payload.model.description,
+      action.payload.model.initialWealth,
+      action.payload.model.annualContribution,
       settings.goal.toNumber(),
       settings.balance.toNumber(),
       settings.horizon.toNumber(),
