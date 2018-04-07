@@ -3,7 +3,6 @@ import { State } from '@ngxs/store';
 export interface RegistrationFormStateModel {
   registrationForm: {
     model: {
-      description: string;
       initialDeposit: number;
       annualDeposit: number;
       targetWealth: number;

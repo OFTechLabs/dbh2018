@@ -11,7 +11,6 @@ import 'rxjs/add/operator/map';
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm = this.formBuilder.group({
-    description: 'retirement',
     initialDeposit: 10000,
     annualDeposit: 1000,
     targetWealth: 50000,

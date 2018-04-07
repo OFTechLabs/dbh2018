@@ -2,10 +2,6 @@
   <div class="left">
     <form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()"
           ngxsForm="registrationstate.registrationForm">
-      <mat-form-field>
-        <input matInput placeholder="Description of your goal" formControlName="description" autofocus>
-        <span matPrefix>&nbsp;&nbsp;</span>
-      </mat-form-field>
 
       <mat-form-field>
         <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
