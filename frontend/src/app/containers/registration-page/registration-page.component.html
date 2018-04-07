@@ -1,3 +1,48 @@
-<p>
-  registration-page works!
-</p>
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.WELCOME">
+  <mat-card-header>
+    <mat-card-title><h1>Retirement</h1></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <h2>What do you want to have when you retire?</h2>
+    <div class="goal-container">
+      <img src="./assets/retirement-icon.png" alt="Retirement" (click)="selectGoal('Retirement')"/>
+      <img src="./assets/house-icon.png" alt="Retirement" (click)="selectGoal('House')"/>
+      <img src="./assets/boat-icon.png" alt="Retirement" (click)="selectGoal('Boat')"/>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.FORM">
+  <mat-card-header>
+    <mat-card-title><h2>Registration</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-registration-form></app-registration-form>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CALCULATION_ASSETMIX">
+  <mat-card-content>
+    <app-loading imageUrl="./assets/a.png" description="Calculation optimal asset allocation..."></app-loading>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CREATING_CONTRACT">
+  <mat-card-content>
+    <app-loading imageUrl="./assets/b.png"
+                 description="Creating smart contract with optimal allocation..."></app-loading>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CONFIRMATION">
+  <mat-card-header>
+    <mat-card-title><h2>Your contract</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <app-confirmation [registrationState]="registrationState$ | async"></app-confirmation>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/dashboard">Confirm</button>
+    <button mat-button color="warn" (click)="cancel()">Cancel</button>
+  </mat-card-actions>
+</mat-card>

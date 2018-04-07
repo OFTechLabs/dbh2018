@@ -1,9 +1,8 @@
-<mat-card>
-  <mat-card-header>
-    <mat-card-title><h2>Return</h2></mat-card-title>
-    <mat-card-subtitle>Let's see how your investments have performed</mat-card-subtitle>
-  </mat-card-header>
-  <mat-card-content>
-    <app-return-chart></app-return-chart>
-  </mat-card-content>
-</mat-card>
+<app-return-chart
+  [contractStartYear]="contractStartYear"
+  [currentYear]="currentYear"
+  [realization]="[120000, 130000, 133000]"
+  [simulationBad]="simulationBad"
+  [simulationExpected]="simulationExpected"
+  [simulationGood]="simulationGood"
+  [targetAmount]="targetAmount"></app-return-chart>

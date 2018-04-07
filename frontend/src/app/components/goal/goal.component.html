@@ -1,4 +1,8 @@
 <div>
-  I want to have <span class="target-amount">{{goal.targetAmount | currency:'EUR':'symbol':'2.0-0'}}</span> in
-  <span class="target-date">{{getMonthName(goal.targetMonth)}} {{goal.targetYear}}</span> for <span class="description">{{goal.description}}</span>
+  <h2>Your goal</h2>
+  <div class="target-amount">{{targetAmount | currency:'EUR':'symbol':'2.0-0'}}</div>
+  <div class="meta-info">
+    In <span class="target-date">{{getMonthName(targetMonth)}} {{targetYear}}</span> for <span
+    class="description">{{description}}</span>
+  </div>
 </div>

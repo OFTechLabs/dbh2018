@@ -6,10 +6,14 @@ import { ChartModule } from 'angular-highcharts';
 import {
   MatButtonModule,
   MatCardModule,
+  MatFormFieldModule,
   MatIconModule,
+  MatInputModule,
   MatListModule,
   MatMenuModule,
+  MatProgressBarModule,
   MatProgressSpinnerModule,
+  MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
   MatToolbarModule
@@ -27,8 +31,18 @@ import { FeasibilityCardComponent } from './containers/feasibility-card/feasibil
 import { GoalCardComponent } from './containers/goal-card/goal-card.component';
 import { CurrentCapitalCardComponent } from './containers/current-capital-card/current-capital-card.component';
 import { ReturnCardComponent } from './containers/return-card/return-card.component';
-import { Registration } from './model/registration';
+import { RegistrationState } from './model/registration.state';
 import { NgxsModule } from '@ngxs/store';
+import { NgxsFormPluginModule } from '@ngxs/form-plugin';
+import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
+import { RegistrationFormState } from './containers/registration-form/registration-form.state';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
+import { LoadingComponent } from './components/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
+import { BlockchainHttpService } from './services/blockchain/blockchain.http.service';
+import { DashboardState } from './model/dashboard.state';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -39,7 +53,11 @@ const MATERIAL_MODULES = [
   MatIconModule,
   MatProgressSpinnerModule,
   MatSnackBarModule,
-  MatCardModule
+  MatCardModule,
+  MatFormFieldModule,
+  MatInputModule,
+  MatSelectModule,
+  MatProgressBarModule
 ];
 
 @NgModule({
@@ -55,10 +73,24 @@ const MATERIAL_MODULES = [
     FeasibilityCardComponent,
     GoalCardComponent,
     CurrentCapitalCardComponent,
-    ReturnCardComponent
+    ReturnCardComponent,
+    RegistrationFormComponent,
+    LoadingComponent,
+    ConfirmationComponent
   ],
-  imports: [BrowserModule, AppRoutingModule, BrowserAnimationsModule, ChartModule, MATERIAL_MODULES, NgxsModule.forRoot([Registration])],
-  providers: [],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    BrowserAnimationsModule,
+    ChartModule,
+    MATERIAL_MODULES,
+    NgxsModule.forRoot([RegistrationState, RegistrationFormState, DashboardState]),
+    NgxsFormPluginModule.forRoot(),
+    FormsModule,
+    ReactiveFormsModule,
+    HttpClientModule
+  ],
+  providers: [DynamicAssetmixOptimizerHttpService, BlockchainHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
