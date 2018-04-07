@@ -75,7 +75,7 @@ contract DynamicStrategy  {
 			beta0: beta0,
 			beta1: beta1,
 			beta2: beta2,
-			currentBond: 1e9,
+			currentBond: 1000000000,
 			currentStock: 0,
 			bondHistory: new int256[](100),
 			stockHistory: new int256[](100)
@@ -103,7 +103,7 @@ contract DynamicStrategy  {
 		int256 wealth = usersData[user].balance;
 
 		int256 fstock = beta0 + beta1*wealth + beta2*int256(currentYear- startYear);
-		int256 fbonds = 1e9 - fstock;		
+		int256 fbonds = 1000000000 - fstock;		
 
 		if (fstock < 0) {
 		    throw;
@@ -111,7 +111,7 @@ contract DynamicStrategy  {
 		if (fbonds < 0) {
 		    throw;
 		}
-		if (fstock+fbonds != 1e9) {
+		if (fstock+fbonds != 1000000000) {
 		    throw;
 		}
 
