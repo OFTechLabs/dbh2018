@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { GoalStateModel } from '../../model/goal.state';
 
 @Component({
   selector: 'app-goal-card',
@@ -7,7 +6,7 @@ import { GoalStateModel } from '../../model/goal.state';
   styleUrls: ['./goal-card.component.scss']
 })
 export class GoalCardComponent implements OnInit {
-  goal: GoalStateModel = new GoalStateModel('my retirement', 11, 2040, 30000);
+  goal = { description: 'my retirement', targetMonth: 11, targetYear: 2040, targetAmout: 30000 };
 
   constructor() {}
 

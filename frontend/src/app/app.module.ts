@@ -33,7 +33,6 @@ import { ReturnCardComponent } from './containers/return-card/return-card.compon
 import { RegistrationState } from './model/registration.state';
 import { NgxsModule } from '@ngxs/store';
 import { NgxsFormPluginModule } from '@ngxs/form-plugin';
-import { GoalState } from './model/goal.state';
 import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
 import { RegistrationFormState } from './containers/registration-form/registration-form.state';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -75,7 +74,7 @@ const MATERIAL_MODULES = [
     BrowserAnimationsModule,
     ChartModule,
     MATERIAL_MODULES,
-    NgxsModule.forRoot([RegistrationState, GoalState, RegistrationFormState]),
+    NgxsModule.forRoot([RegistrationState, RegistrationFormState]),
     NgxsFormPluginModule.forRoot(),
     FormsModule,
     ReactiveFormsModule
