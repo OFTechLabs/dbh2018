@@ -7,11 +7,11 @@ contract DynamicStrategy  {
     	address referenceAddress;
     
     	int256 balance;
-    	int256[] balanceHistory;
+    	int256[100] balanceHistory;
     
     	uint256 startYear;
     	uint256 elapsedYears;
-    	uint256[] yearHistory;
+    	uint256[100] yearHistory;
 
     	int256 goal;	
     	int256 horizon;
@@ -23,8 +23,8 @@ contract DynamicStrategy  {
     	int256 currentBond;
     	int256 currentStock;
 
-    	int256[] bondHistory;
-    	int256[] stockHistory;
+    	int256[100] bondHistory;
+    	int256[100] stockHistory;
     
     }
 
@@ -58,24 +58,19 @@ contract DynamicStrategy  {
 	function subscribe(int256 balance, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public newuser returns(bool) {		
 	    users.push(msg.sender);
 		total_users++;
+		uint256[100] test;
 		total_balance = total_balance + balance;
-		usersData[msg.sender] = UserData({
-			referenceAddress: msg.sender, 
-			balance: int256(balance), 
-			balanceHistory: new int256[](100),
-			startYear: currentYear,
-			elapsedYears: 0,
-			yearHistory: new uint256[](100),
-			goal: goal,
-			horizon: horizon,
-			beta0: beta0,
-			beta1: beta1,
-			beta2: beta2,
-			currentBond: 1e9,
-			currentStock: 0,
-			bondHistory: new int256[](100),
-			stockHistory: new int256[](100)
-			});
+		
+		usersData[msg.sender].referenceAddress = msg.sender;
+		usersData[msg.sender].balance = balance;
+		usersData[msg.sender].startYear = currentYear;
+		usersData[msg.sender].goal = goal;
+		usersData[msg.sender].horizon = horizon;
+		usersData[msg.sender].beta0 = beta0;
+		usersData[msg.sender].beta1 = beta1;
+		usersData[msg.sender].beta2 = beta2;
+		usersData[msg.sender].currentBond = 1e9;
+		usersData[msg.sender].currentStock = 0;
 
 		reallocate(msg.sender);
 		makerecord(msg.sender);		
