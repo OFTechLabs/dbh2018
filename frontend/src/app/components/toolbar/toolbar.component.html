@@ -1,1 +1,15 @@
-<mat-toolbar color="primary"></mat-toolbar>
+<mat-toolbar color="primary">
+  <span class="example-spacer"></span>
+
+  <button class="profile-btn" mat-button [matMenuTriggerFor]="profileMenu">
+    Henkie
+    <mat-icon>person</mat-icon>
+  </button>
+  <mat-menu #profileMenu="matMenu">
+    <button class="logout-btn" mat-button>
+      <mat-icon>exit_to_app</mat-icon>
+      Logout
+    </button>
+  </mat-menu>
+
+</mat-toolbar>
