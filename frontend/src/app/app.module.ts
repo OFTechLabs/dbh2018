@@ -42,6 +42,7 @@ import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlockchainHttpService } from './services/blockchain/blockchain.http.service';
 import { DashboardState } from './model/dashboard.state';
+import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -74,7 +75,8 @@ const MATERIAL_MODULES = [
     CurrentCapitalCardComponent,
     ReturnCardComponent,
     RegistrationFormComponent,
-    LoadingComponent
+    LoadingComponent,
+    ConfirmationComponent
   ],
   imports: [
     BrowserModule,

@@ -3,7 +3,7 @@ import { BlockchainHttpService } from '../services/blockchain/blockchain.http.se
 import { DynamicAssetmixOptimizerHttpService } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 import { DynamicStrategyResponseJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
 import { RegistrationPageStatus } from './registration-page-status.enum';
-import { OptimizeAllocationStrategy, Register, SubscribeContract } from './registration.action';
+import { CancelConfirmation, OptimizeAllocationStrategy, Register, SubscribeContract } from './registration.action';
 
 export class RegistrationUserModel {
   constructor(public description: string, public initialWealth: number, public annualContribution: number, public targetWealth: number, public targetYear: number) {}
@@ -54,5 +54,11 @@ export class RegistrationState {
       dynamicStrategy.t
     );
     setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CONFIRMATION, []));
+  }
+
+  @Action(CancelConfirmation)
+  async cancelConfirmation({ getState, setState }: StateContext<RegistrationStateModel>) {
+    const currentState = getState();
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.FORM, []));
   }
 }

@@ -11,17 +11,17 @@ import 'rxjs/add/operator/map';
 })
 export class RegistrationFormComponent implements OnInit {
   registrationForm = this.formBuilder.group({
-    description: null,
-    initialDeposit: null,
-    annualDeposit: null,
-    targetWealth: null,
-    targetYear: null
+    description: 'retirement',
+    initialDeposit: 10000,
+    annualDeposit: 1000,
+    targetWealth: 50000,
+    targetYear: 2040
   });
 
   years: number[] = [];
 
   constructor(private formBuilder: FormBuilder, private store: Store) {
-    for (let i = 2019; i <= 2058; i++) {
+    for (let i = 2023; i <= 2058; i++) {
       this.years.push(i);
     }
   }
