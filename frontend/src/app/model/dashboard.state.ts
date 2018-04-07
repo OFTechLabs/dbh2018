@@ -73,7 +73,7 @@ export class DashboardState {
 
   private getValuesFromquantile(quantiles: { [key: string]: number }): number[] {
     const values: number[] = [];
-    for (const key in Object.keys(quantiles)) {
+    for (const key in quantiles) {
       if (quantiles.hasOwnProperty(key)) {
         values.push(quantiles[key]);
       }
