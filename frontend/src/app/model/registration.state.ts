@@ -1,6 +1,5 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { RegisterAction } from './registration.action';
-import { RegistrationFormStateModel } from '../containers/registration-form/registration-form.state';
 
 export class RegistrationStateModel {
   constructor(private _description: string, private _initialWealth: number, private _annualContribution: number, private _targetWealth: number, private _targetYear: number) {}
@@ -32,7 +31,7 @@ export class RegistrationStateModel {
 })
 export class RegistrationState {
   @Action(RegisterAction)
-  feedAnimals({ getState, setState }: StateContext<RegistrationStateModel>, action: RegisterAction) {
+  registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: RegisterAction) {
     const formModel = action.payload.registrationForm.model;
     setState(new RegistrationStateModel(formModel.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear));
   }

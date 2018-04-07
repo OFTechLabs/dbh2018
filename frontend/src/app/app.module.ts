@@ -36,6 +36,7 @@ import { NgxsFormPluginModule } from '@ngxs/form-plugin';
 import { RegistrationFormComponent } from './containers/registration-form/registration-form.component';
 import { RegistrationFormState } from './containers/registration-form/registration-form.state';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -79,7 +80,7 @@ const MATERIAL_MODULES = [
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [],
+  providers: [DynamicAssetmixOptimizerHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
