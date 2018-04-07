@@ -55,26 +55,26 @@ contract DynamicStrategy  {
 		currentYear = 2018;
 	}
 	
-	function getBalanceHistory(address user) public returns (int256[100]) {
+	function getBalanceHistory(address user) public view returns (int256[100]) {
 	    return usersData[user].balanceHistory;
 	}
 	
-	function getYearHistory(address user) public returns (uint256[100]) {
+	function getYearHistory(address user) public view returns (uint256[100]) {
 	    return usersData[user].yearHistory;
 	}
 	
-	function getBondHistory(address user) public returns (int256[100]) {
+	function getBondHistory(address user) public view returns (int256[100]) {
 	    return usersData[user].bondHistory;
 	}
 	
-	function getStockHistory(address user) public returns (int256[100]) {
+	function getStockHistory(address user) public view returns (int256[100]) {
 	    return usersData[user].stockHistory;
 	}
 
 	function subscribe(int256 balance, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public newuser returns(bool) {		
 	    users.push(msg.sender);
+		
 		total_users++;
-		uint256[100] test;
 		total_balance = total_balance + balance;
 		
 		usersData[msg.sender].referenceAddress = msg.sender;
