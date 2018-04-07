@@ -31,7 +31,7 @@ export class RegistrationStateModel {
 })
 export class RegistrationState {
   @Action(RegisterAction)
-  feedAnimals({ getState, setState }: StateContext<RegistrationStateModel>, action: RegisterAction) {
+  registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: RegisterAction) {
     const formModel = action.payload.registrationForm.model;
     setState(new RegistrationStateModel(formModel.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear));
   }
