@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Register } from '../../model/registration.action';
 import 'rxjs/add/operator/map';
-import { BlockchainHttpService } from '../../services/blockchain/blockchain.http.service';
 
 @Component({
   selector: 'app-registration-form',
