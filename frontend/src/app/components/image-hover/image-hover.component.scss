@@ -1,0 +1,13 @@
+span .hover {
+  display: none;
+}
+
+span:hover {
+  .hover {
+    display: inline !important;
+  }
+
+  .normal {
+    display: none !important;
+  }
+}

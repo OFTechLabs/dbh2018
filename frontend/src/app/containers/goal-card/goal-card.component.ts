@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./goal-card.component.scss']
 })
 export class GoalCardComponent implements OnInit {
-  goal = { description: 'my retirement', targetMonth: 3, targetYear: 2040, targetAmount: 30000 };
+  goal = { description: 'my retirement', targetMonth: 3, targetYear: 2058, targetAmount: 60000 };
 
   constructor() {}
 

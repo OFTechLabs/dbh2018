@@ -12,9 +12,9 @@ import 'rxjs/add/operator/map';
 export class RegistrationFormComponent implements OnInit {
   registrationForm = this.formBuilder.group({
     initialDeposit: 10000,
-    annualDeposit: 1000,
-    targetWealth: 50000,
-    targetYear: 2040
+    annualDeposit: 0,
+    targetWealth: 60000,
+    targetYear: 2058
   });
 
   years: number[] = [];
