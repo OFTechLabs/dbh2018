@@ -18,3 +18,9 @@ export class OptimizeAllocationStrategy {
 
   constructor() {}
 }
+
+export class CancelConfirmation {
+  static readonly type = '[Registration] Cancel confirmation';
+
+  constructor() {}
+}
