@@ -1,3 +1,16 @@
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.WELCOME">
+  <mat-card-header>
+    <mat-card-title><h2>Welcome!</h2></mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    Doel kiezen en alles...
+    <button mat-raised-button color="primary" (click)="selectGoal('Retirement')">Retirement</button>
+    <button mat-raised-button color="primary" (click)="selectGoal('Kids college fund')">Kids college fund</button>
+    <button mat-raised-button color="primary" (click)="selectGoal('Tesla Model S')">Tesla Model S</button>
+    <button mat-raised-button color="primary" (click)="selectGoal('58 Wally Power Boat')">58 Wally Power Boat</button>
+  </mat-card-content>
+</mat-card>
+
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.FORM">
   <mat-card-header>
     <mat-card-title><h2>Registration</h2></mat-card-title>

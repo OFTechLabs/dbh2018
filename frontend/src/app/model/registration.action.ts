@@ -24,3 +24,9 @@ export class CancelConfirmation {
 
   constructor() {}
 }
+
+export class SelectGoal {
+  static readonly type = '[Registration] Select goal';
+
+  constructor(public goalDescription: string) {}
+}
