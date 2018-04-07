@@ -16,7 +16,7 @@ export class BlockchainHttpService {
     this.web3.eth.defaultAccount = '0x00a329c0648769A73afAc7F9381E08FB43dBEA72';
   }
 
-  public async subscribe(amount: number, goal: number, horizon: number, beta0: number, beta1: number, beta2: number): Promise<boolean> {
+  public async subscribe(amount: number, goal: number, horizon: number, beta0: number, beta1: number, beta2: number): Promise<string> {
     return await this.contract.subscribe(amount, goal, horizon, beta0, beta1, beta2);
   }
 
@@ -36,7 +36,7 @@ export class BlockchainHttpService {
     return await this.contract.total_balance();
   }
 
-  public async settings(address: number): Promise<UserSetttings> {
+  public async settings(address: string): Promise<UserSetttings> {
     const array = await this.contract.settings(address);
     return {
       referenceAddress: array[0],

@@ -10,12 +10,12 @@ export class RegistrationUserModel {
 }
 
 export class RegistrationStateModel {
-  constructor(public model: RegistrationUserModel, public registrationPageStatus: RegistrationPageStatus, public errors: { error: string }[]) {}
+  constructor(public model: RegistrationUserModel, public registrationPageStatus: RegistrationPageStatus, public errors: { error: string }[], public subscriptionId: string) {}
 }
 
 @State<RegistrationStateModel>({
   name: 'registration',
-  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), RegistrationPageStatus.WELCOME, [])
+  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), RegistrationPageStatus.WELCOME, [], '')
 })
 export class RegistrationState {
   constructor(private store: Store, private dynamicAssetmixOptimizerHttpService: DynamicAssetmixOptimizerHttpService, private blockchainHttpService: BlockchainHttpService) {}
@@ -25,7 +25,7 @@ export class RegistrationState {
     const currentState = getState();
     const formModel = action.payload.registrationForm.model;
     const newUserModel = new RegistrationUserModel(currentState.model.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear);
-    setState(new RegistrationStateModel(newUserModel, RegistrationPageStatus.CALCULATION_ASSETMIX, []));
+    setState(new RegistrationStateModel(newUserModel, RegistrationPageStatus.CALCULATION_ASSETMIX, [], ''));
     this.store.dispatch(new OptimizeAllocationStrategy());
   }
 
@@ -34,7 +34,7 @@ export class RegistrationState {
     const currentState = getState();
     const result: DynamicStrategyResponseJson = await this.dynamicAssetmixOptimizerHttpService.getDynamicStrategy(currentState);
 
-    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CREATING_CONTRACT, []));
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CREATING_CONTRACT, [], currentState.subscriptionId));
     this.store.dispatch(new SubscribeContract(result));
   }
 
@@ -46,7 +46,7 @@ export class RegistrationState {
     const horizon = currentState.model.targetYear - currentYear;
     const dynamicStrategy: DynamicStrategyResponseJson = action.dynamicStrategy;
 
-    await this.blockchainHttpService.subscribe(
+    const subscribed = await this.blockchainHttpService.subscribe(
       currentState.model.initialWealth,
       currentState.model.targetWealth,
       horizon,
@@ -54,13 +54,14 @@ export class RegistrationState {
       dynamicStrategy.wealth,
       dynamicStrategy.t
     );
-    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CONFIRMATION, []));
+    console.log(subscribed);
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CONFIRMATION, [], subscribed));
   }
 
   @Action(CancelConfirmation)
   async cancelConfirmation({ getState, setState }: StateContext<RegistrationStateModel>) {
     const currentState = getState();
-    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.WELCOME, []));
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.WELCOME, [], ''));
   }
 
   @Action(SelectGoal)
@@ -75,6 +76,6 @@ export class RegistrationState {
       currentState.model.targetYear
     );
 
-    setState(new RegistrationStateModel(newModel, RegistrationPageStatus.FORM, []));
+    setState(new RegistrationStateModel(newModel, RegistrationPageStatus.FORM, [], ''));
   }
 }

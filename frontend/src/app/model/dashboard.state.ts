@@ -34,7 +34,7 @@ export class DashboardState {
 
   @Action(LoadDashboard)
   async loadUserModel({ getState, setState }: StateContext<DashboardModel>, action: LoadDashboard) {
-    const settings = await this.blockchainHttpService.settings(1);
+    const settings = await this.blockchainHttpService.settings(action.payload.subscriptionId);
 
     const newUserModel = new DasboardUserModel(
       action.payload.model.description,
@@ -54,7 +54,7 @@ export class DashboardState {
 
   @Action(LoadDashboard)
   async loadResultsModel({ getState, setState }: StateContext<DashboardModel>, action: LoadDashboard) {
-    const settings = await this.blockchainHttpService.settings(1);
+    const settings = await this.blockchainHttpService.settings(action.payload.subscriptionId);
     const quantiles: QuantilesResultJson = await this.dynamicAssetMiOptimizer.getWealthQuantiles(settings);
 
     const pointOne = this.getValuesFromquantile(quantiles['0.1']);
