@@ -19,11 +19,14 @@ export class DynamicAssetmixOptimizerHttpService {
   constructor(private http: HttpClient) {}
 
   async getDynamicStrategy(registration: RegistrationStateModel): Promise<DynamicStrategyResponseJson> {
+    const currentYear = new Date().getFullYear();
+    const horizon = registration.model.targetYear - currentYear;
+
     const requestJson: DynamicStrategyRequestJson = {
       initial_wealth: registration.model.initialWealth,
       wealth_target: registration.model.targetWealth,
       periodic_cashflow: registration.model.annualContribution,
-      investment_horizon: 40 // todo
+      investment_horizon: horizon
     };
 
     return this.http.post<DynamicStrategyResponseJson>(API_ROOT + '/get_dynamic_strategy', requestJson).toPromise();

@@ -6,43 +6,11 @@ import { RegistrationPageStatus } from './registration-page-status.enum';
 import { OptimizeAllocationStrategy, Register, SubscribeContract } from './registration.action';
 
 export class RegistrationUserModel {
-  constructor(private _description: string, private _initialWealth: number, private _annualContribution: number, private _targetWealth: number, private _targetYear: number) {}
-
-  get initialWealth(): number {
-    return this._initialWealth;
-  }
-
-  get annualContribution(): number {
-    return this._annualContribution;
-  }
-
-  get targetWealth(): number {
-    return this._targetWealth;
-  }
-
-  get description(): string {
-    return this._description;
-  }
-
-  get targetYear(): number {
-    return this._targetYear;
-  }
+  constructor(public description: string, public initialWealth: number, public annualContribution: number, public targetWealth: number, public targetYear: number) {}
 }
 
 export class RegistrationStateModel {
-  constructor(private _model: RegistrationUserModel, private _registrationPageStatus: RegistrationPageStatus, private _errors: { error: string }[]) {}
-
-  get model(): RegistrationUserModel {
-    return this._model;
-  }
-
-  get registrationPageStatus(): RegistrationPageStatus {
-    return this._registrationPageStatus;
-  }
-
-  get errors(): { error: string }[] {
-    return this._errors;
-  }
+  constructor(public model: RegistrationUserModel, public registrationPageStatus: RegistrationPageStatus, public errors: { error: string }[]) {}
 }
 
 @State<RegistrationStateModel>({

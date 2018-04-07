@@ -9,7 +9,7 @@ import { RegistrationPageStatus } from '../../model/registration-page-status.enu
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-  @Select(state => state.registration._registrationPageStatus)
+  @Select(state => state.registration.registrationPageStatus)
   status$: Observable<RegistrationPageStatus>;
 
   registationPageStatusses = RegistrationPageStatus;
