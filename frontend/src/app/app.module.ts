@@ -41,6 +41,7 @@ import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix
 import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BlockchainHttpService } from './services/blockchain/blockchain.http.service';
+import { DashboardState } from './model/dashboard.state';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -81,7 +82,7 @@ const MATERIAL_MODULES = [
     BrowserAnimationsModule,
     ChartModule,
     MATERIAL_MODULES,
-    NgxsModule.forRoot([RegistrationState, RegistrationFormState]),
+    NgxsModule.forRoot([RegistrationState, RegistrationFormState, DashboardState]),
     NgxsFormPluginModule.forRoot(),
     FormsModule,
     ReactiveFormsModule,
