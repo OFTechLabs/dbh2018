@@ -9,13 +9,13 @@
 
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.CALCULATION_ASSETMIX">
   <mat-card-content>
-    <app-loading description="Calculation optimal asset allocation..."></app-loading>
+    <app-loading imageUrl="./assets/a.png" description="Calculation optimal asset allocation..."></app-loading>
   </mat-card-content>
 </mat-card>
 
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.CREATING_CONTRACT">
   <mat-card-content>
-    <app-loading description="Creating smart contract with optimal allocation..."></app-loading>
+    <app-loading imageUrl="./assets/b.png" description="Creating smart contract with optimal allocation..."></app-loading>
   </mat-card-content>
 </mat-card>
 

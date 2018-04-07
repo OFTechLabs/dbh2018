@@ -8,6 +8,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class LoadingComponent implements OnInit {
   @Input() description: string;
 
+  @Input() imageUrl: string;
+
   constructor() {}
 
   ngOnInit() {}
