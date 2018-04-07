@@ -33,6 +33,6 @@ export interface DynamicStrategyResponseJson {
   wealth: number;
 }
 
-export interface DynamicStrategyResponseJson {
+export interface ProbabilityResponseJson {
   Probablity_terminal_wealth_exceeds_target: number;
 }

@@ -4,6 +4,7 @@ import { RegistrationStateModel } from '../../model/registration.state';
 import {
   DynamicStrategyRequestJson,
   DynamicStrategyResponseJson,
+  ProbabilityResponseJson,
   QuantilesResultJson,
   TerminalWealthRequestJson,
   TerminalWealthResponseJson,
@@ -38,10 +39,10 @@ export class DynamicAssetmixOptimizerHttpService {
     return this.http.post<TerminalWealthResponseJson>(API_ROOT + '/get_terminal_wealth', requestJson).toPromise();
   }
 
-  async getSuccesProbabilityDynamicStrategy(userSettings: UserSetttings): Promise<DynamicStrategyResponseJson> {
+  async getSuccesProbabilityDynamicStrategy(userSettings: UserSetttings): Promise<ProbabilityResponseJson> {
     const requestJson = this.createTerminalWealthRequest(userSettings);
 
-    return this.http.post<DynamicStrategyResponseJson>(API_ROOT + '/get_succes_probability_dynamic_strategy', requestJson).toPromise();
+    return this.http.post<ProbabilityResponseJson>(API_ROOT + '/get_succes_probability_dynamic_strategy', requestJson).toPromise();
   }
 
   async getWealthQuantiles(userSettings: UserSetttings): Promise<QuantilesResultJson> {
@@ -61,13 +62,13 @@ export class DynamicAssetmixOptimizerHttpService {
 
   private createTerminalWealthRequest(userSettings: UserSetttings) {
     return {
-      initial_wealth: userSettings.balance,
-      wealth_target: userSettings.goal,
+      initial_wealth: userSettings.balance.toNumber(),
+      wealth_target: userSettings.goal.toNumber(),
       periodic_cashflow: 100, // todo
-      investment_horizon: userSettings.horizon,
-      constant: userSettings.beta0,
-      coeff_wealth: userSettings.beta1,
-      coeff_t: userSettings.beta2
+      investment_horizon: userSettings.horizon.toNumber(),
+      constant: userSettings.beta0.toNumber(),
+      coeff_wealth: userSettings.beta1.toNumber(),
+      coeff_t: userSettings.beta2.toNumber()
     };
   }
 }

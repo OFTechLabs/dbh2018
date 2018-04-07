@@ -66,7 +66,9 @@ export class DashboardState {
     const pointFive = this.getValuesFromquantile(quantiles['0.50']);
     const pointNine = this.getValuesFromquantile(quantiles['0.90']);
 
-    const newResultsModel = new DashboardResultsModel(0, [], pointNine, pointFive, pointOne);
+    const feasibility = await this.dynamicAssetMiOptimizer.getSuccesProbabilityDynamicStrategy(settings);
+
+    const newResultsModel = new DashboardResultsModel(feasibility.Probablity_terminal_wealth_exceeds_target, [], pointNine, pointFive, pointOne);
     const doneLoading = currentState.userModel !== null;
     const newModel = new DashboardModel(currentState.userModel, newResultsModel, doneLoading);
     setState(newModel);
