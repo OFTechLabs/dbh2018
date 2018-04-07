@@ -16,7 +16,13 @@ export class RegistrationFormComponent implements OnInit {
     targetYear: null
   });
 
-  constructor(private formBuilder: FormBuilder) {}
+  years: number[] = [];
+
+  constructor(private formBuilder: FormBuilder) {
+    for (let i = 2019; i <= 2058; i++) {
+      this.years.push(i);
+    }
+  }
 
   ngOnInit() {}
 

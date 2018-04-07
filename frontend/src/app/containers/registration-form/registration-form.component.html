@@ -24,10 +24,7 @@
 
   <mat-form-field>
     <mat-select placeholder="Target year" formControlName="targetYear">
-      <mat-option value="2040">2040</mat-option>
-      <mat-option value="2041">2041</mat-option>
-      <mat-option value="2042">2042</mat-option>
-      <mat-option value="2043">2043</mat-option>
+      <mat-option *ngFor="let year of years" value="{{year}}">{{year}}</mat-option>
     </mat-select>
     <span matPrefix>&nbsp;&nbsp;</span>
   </mat-form-field>
