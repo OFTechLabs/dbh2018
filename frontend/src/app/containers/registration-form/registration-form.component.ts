@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
-import { BlockchainHttpService } from '../../blockchain/blockchain.http.service';
 
 @Component({
   selector: 'app-registration-form',

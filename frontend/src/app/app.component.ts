@@ -1,5 +1,4 @@
-import { Component, OnInit } from '@angular/core';
-import { BlockchainHttpService } from './blockchain/blockchain.http.service';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-root',
