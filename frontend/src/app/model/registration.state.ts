@@ -3,7 +3,7 @@ import { BlockchainHttpService } from '../services/blockchain/blockchain.http.se
 import { DynamicAssetmixOptimizerHttpService } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 import { DynamicStrategyResponseJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
 import { RegistrationPageStatus } from './registration-page-status.enum';
-import { CancelConfirmation, OptimizeAllocationStrategy, Register, SubscribeContract } from './registration.action';
+import { CancelConfirmation, OptimizeAllocationStrategy, Register, SelectGoal, SubscribeContract } from './registration.action';
 
 export class RegistrationUserModel {
   constructor(public description: string, public initialWealth: number, public annualContribution: number, public targetWealth: number, public targetYear: number) {}
@@ -15,7 +15,7 @@ export class RegistrationStateModel {
 
 @State<RegistrationStateModel>({
   name: 'registration',
-  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), RegistrationPageStatus.FORM, [])
+  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), RegistrationPageStatus.WELCOME, [])
 })
 export class RegistrationState {
   constructor(private store: Store, private dynamicAssetmixOptimizerHttpService: DynamicAssetmixOptimizerHttpService, private blockchainHttpService: BlockchainHttpService) {}
@@ -60,6 +60,21 @@ export class RegistrationState {
   @Action(CancelConfirmation)
   async cancelConfirmation({ getState, setState }: StateContext<RegistrationStateModel>) {
     const currentState = getState();
-    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.FORM, []));
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.WELCOME, []));
+  }
+
+  @Action(SelectGoal)
+  async selectGoal({ getState, setState }: StateContext<RegistrationStateModel>, action: SelectGoal) {
+    const currentState = getState();
+
+    const newModel = new RegistrationUserModel(
+      action.goalDescription,
+      currentState.model.initialWealth,
+      currentState.model.annualContribution,
+      currentState.model.targetWealth,
+      currentState.model.targetYear
+    );
+
+    setState(new RegistrationStateModel(newModel, RegistrationPageStatus.FORM, []));
   }
 }

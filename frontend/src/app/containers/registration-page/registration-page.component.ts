@@ -3,7 +3,7 @@ import { Select, Store } from '@ngxs/store';
 import { Observable } from 'rxjs/Observable';
 import { RegistrationPageStatus } from '../../model/registration-page-status.enum';
 import { RegistrationState, RegistrationStateModel } from '../../model/registration.state';
-import { CancelConfirmation } from '../../model/registration.action';
+import { CancelConfirmation, SelectGoal } from '../../model/registration.action';
 
 @Component({
   selector: 'app-registration-page',
@@ -24,5 +24,9 @@ export class RegistrationPageComponent implements OnInit {
 
   cancel() {
     this.store.dispatch(new CancelConfirmation());
+  }
+
+  selectGoal(goalDescription: string) {
+    this.store.dispatch(new SelectGoal(goalDescription));
   }
 }
