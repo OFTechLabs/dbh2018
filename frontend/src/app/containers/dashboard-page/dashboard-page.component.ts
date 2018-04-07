@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Store } from '@ngxs/store';
+import { Select, Store } from '@ngxs/store';
 import { LoadDashboard } from '../../model/dashboard.actions';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/operator/take';
+import { Observable } from 'rxjs/Observable';
+import { DashboardModel, DashboardState } from '../../model/dashboard.state';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -10,6 +12,10 @@ import 'rxjs/add/operator/take';
   styleUrls: ['./dashboard-page.component.scss']
 })
 export class DashboardPageComponent implements OnInit {
+  @Select(DashboardState) dashboard$: Observable<DashboardModel>;
+
+  public currentYear = new Date().getFullYear();
+
   constructor(private store: Store) {}
 
   ngOnInit() {

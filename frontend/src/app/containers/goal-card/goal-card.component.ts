@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-goal-card',
@@ -6,7 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./goal-card.component.scss']
 })
 export class GoalCardComponent implements OnInit {
-  goal = { description: 'my retirement', targetMonth: 3, targetYear: 2040, targetAmount: 30000 };
+  @Input() public description: string;
+
+  public targetMonth = 3;
+
+  @Input() public targetYear: number;
+
+  @Input() public targetAmount: number;
 
   constructor() {}
 

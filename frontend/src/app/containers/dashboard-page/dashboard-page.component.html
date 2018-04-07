@@ -1,20 +1,20 @@
-<div class="wrapper">
+<div class="wrapper" *ngIf="!(dashboard$ | async).loading">
 
   <mat-card class="small goal">
     <mat-card-content>
-      <app-goal-card></app-goal-card>
+      <app-goal-card [description]="(dashboard$ | async).userModel.description" [targetAmount]="(dashboard$ | async).userModel.targetWealth" [targetYear]="(dashboard$ | async).userModel.targetYear"></app-goal-card>
     </mat-card-content>
   </mat-card>
 
   <mat-card class="small feasibility">
     <mat-card-content>
-      <app-feasibility-card></app-feasibility-card>
+      <app-feasibility-card [feasibility]="(dashboard$ | async).results.feasibility"></app-feasibility-card>
     </mat-card-content>
   </mat-card>
 
   <mat-card class="small current-capital">
     <mat-card-content>
-      <app-current-capital-card></app-current-capital-card>
+      <app-current-capital-card [currentCapital]="(dashboard$ | async).userModel.initialWealth" [currentYear]="currentYear"></app-current-capital-card>
     </mat-card-content>
   </mat-card>
 
@@ -24,7 +24,13 @@
       <mat-card-subtitle>Realization & prognosis</mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
-      <app-return-card></app-return-card>
+      <app-return-card [contractStartYear]="currentYear"
+                       [currentYear]="currentYear"
+                       [realization]="[120000, 130000, 133000]"
+                       [simulationBad]="(dashboard$ | async).results.simulationBad"
+                       [simulationExpected]="(dashboard$ | async).results.simulationExpected"
+                       [simulationGood]="(dashboard$ | async).results.simulationGood"
+                       [targetAmount]="(dashboard$ | async).userModel.targetWealth"></app-return-card>
     </mat-card-content>
   </mat-card>
 
