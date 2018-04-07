@@ -1,6 +1,7 @@
 import * as Web3 from 'web3';
 import { abiArray } from './abi';
 import { Injectable } from '@angular/core';
+import BigNumber from 'web3/bower/bignumber.js/bignumber';
 
 @Injectable()
 export class BlockchainHttpService {
@@ -42,13 +43,13 @@ export class BlockchainHttpService {
 
 export interface UserSetttings {
   referenceAddress: string;
-  balance: number;
-  t_start: number;
-  goal: number;
-  horizon: number;
-  beta0: number;
-  beta1: number;
-  beta2: number;
-  fbonds: number;
-  fstock: number;
+  balance: BigNumber;
+  t_start: BigNumber;
+  goal: BigNumber;
+  horizon: BigNumber;
+  beta0: BigNumber;
+  beta1: BigNumber;
+  beta2: BigNumber;
+  fbonds: BigNumber;
+  fstock: BigNumber;
 }

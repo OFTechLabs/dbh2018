@@ -46,13 +46,13 @@ export class DynamicAssetmixOptimizerHttpService {
 
   async getWealthQuantiles(userSettings: UserSetttings): Promise<QuantilesResultJson> {
     const requestJson: WealthQuantilesRequestJson = {
-      initial_wealth: userSettings.balance,
-      wealth_target: userSettings.goal,
+      initial_wealth: userSettings.balance.toNumber(),
+      wealth_target: userSettings.goal.toNumber(),
       periodic_cashflow: 100, // todo
-      investment_horizon: userSettings.horizon,
-      constant: userSettings.beta0,
-      coeff_wealth: userSettings.beta1,
-      coeff_t: userSettings.beta2,
+      investment_horizon: userSettings.horizon.toNumber(),
+      constant: userSettings.beta0.toNumber(),
+      coeff_wealth: userSettings.beta1.toNumber(),
+      coeff_t: userSettings.beta2.toNumber(),
       quantiles: QUANTILES
     };
 

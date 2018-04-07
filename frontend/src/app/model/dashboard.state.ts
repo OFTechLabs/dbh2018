@@ -40,7 +40,16 @@ export class DashboardState {
     const settings = await this.blockchainHttpService.settings(1);
     console.log(settings);
 
-    const newUserModel = new DasboardUserModel('', 0, 0, settings.goal, settings.balance, settings.horizon, settings.fstock, settings.fbonds);
+    const newUserModel = new DasboardUserModel(
+      '',
+      0,
+      0,
+      settings.goal.toNumber(),
+      settings.balance.toNumber(),
+      settings.horizon.toNumber(),
+      settings.fstock.toNumber(),
+      settings.fbonds.toNumber()
+    );
     const doneLoading = currentState.results !== null;
     const newModel = new DashboardModel(newUserModel, currentState.results, doneLoading);
     setState(newModel);
