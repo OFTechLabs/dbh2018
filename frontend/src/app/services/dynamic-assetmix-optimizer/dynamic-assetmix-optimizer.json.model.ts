@@ -4,7 +4,7 @@ export interface CoefficientJson {
   coeff_t: number;
 }
 
-export interface QuantilesJson {
+export interface QuantilesRequestJson {
   quantiles: number[];
 }
 
@@ -17,4 +17,18 @@ export interface DynamicStrategyRequestJson {
 
 export interface TerminalWealthRequestJson extends DynamicStrategyRequestJson, CoefficientJson {}
 
-export interface WealthQuantilesRequestJson extends TerminalWealthRequestJson, QuantilesJson {}
+export interface WealthQuantilesRequestJson extends TerminalWealthRequestJson, QuantilesRequestJson {}
+
+export interface QuantilesResultJson {
+  [key: string]: { [key: string]: number };
+}
+
+export interface TerminalWealthResponseJson {
+  [key: string]: number;
+}
+
+export interface DynamixStrategyResponseJson {
+  constant: number;
+  t: number;
+  wealth: number;
+}
