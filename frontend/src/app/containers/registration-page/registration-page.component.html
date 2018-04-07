@@ -1,13 +1,14 @@
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.WELCOME">
   <mat-card-header>
-    <mat-card-title><h2>Welcome!</h2></mat-card-title>
+    <mat-card-title><h1>Retirement</h1></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-    Doel kiezen en alles...
-    <button mat-raised-button color="primary" (click)="selectGoal('Retirement')">Retirement</button>
-    <button mat-raised-button color="primary" (click)="selectGoal('Kids college fund')">Kids college fund</button>
-    <button mat-raised-button color="primary" (click)="selectGoal('Tesla Model S')">Tesla Model S</button>
-    <button mat-raised-button color="primary" (click)="selectGoal('58 Wally Power Boat')">58 Wally Power Boat</button>
+    <h2>What do you want to have when you retire?</h2>
+    <div class="goal-container">
+      <img src="./assets/retirement-icon.png" alt="Retirement" (click)="selectGoal('Retirement')"/>
+      <img src="./assets/house-icon.png" alt="Retirement" (click)="selectGoal('House')"/>
+      <img src="./assets/boat-icon.png" alt="Retirement" (click)="selectGoal('Boat')"/>
+    </div>
   </mat-card-content>
 </mat-card>
 
@@ -28,7 +29,8 @@
 
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.CREATING_CONTRACT">
   <mat-card-content>
-    <app-loading imageUrl="./assets/b.png" description="Creating smart contract with optimal allocation..."></app-loading>
+    <app-loading imageUrl="./assets/b.png"
+                 description="Creating smart contract with optimal allocation..."></app-loading>
   </mat-card-content>
 </mat-card>
 
