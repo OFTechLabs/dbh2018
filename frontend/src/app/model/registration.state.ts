@@ -3,6 +3,7 @@ import { OptimizeAllocationStrategy, Register, SubscribeContract } from './regis
 import { BlockchainHttpService } from '../services/blockchain/blockchain.http.service';
 import { DynamicAssetmixOptimizerHttpService } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 import { DynamicStrategyResponseJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
+import { RegistrationPageStatus } from './registration-page-status.enum';
 
 export class RegistrationUserModel {
   constructor(private _description: string, private _initialWealth: number, private _annualContribution: number, private _targetWealth: number, private _targetYear: number) {}
@@ -29,18 +30,14 @@ export class RegistrationUserModel {
 }
 
 export class RegistrationStateModel {
-  constructor(private _model: RegistrationUserModel, private _loadingSmartContract: boolean, private _loadingAssetOptimization: boolean, private _errors: { error: string }[]) {}
+  constructor(private _model: RegistrationUserModel, private _registrationPageStatus: RegistrationPageStatus, private _errors: { error: string }[]) {}
 
   get model(): RegistrationUserModel {
     return this._model;
   }
 
-  get loadingSmartContract(): boolean {
-    return this._loadingSmartContract;
-  }
-
-  get loadingAssetOptimization(): boolean {
-    return this._loadingAssetOptimization;
+  get registrationPageStatus(): RegistrationPageStatus {
+    return this._registrationPageStatus;
   }
 
   get errors(): { error: string }[] {
@@ -50,7 +47,7 @@ export class RegistrationStateModel {
 
 @State<RegistrationStateModel>({
   name: 'registration',
-  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), false, false, [])
+  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), RegistrationPageStatus.FORM, [])
 })
 export class RegistrationState {
   constructor(private store: Store, private dynamicAssetmixOptimizerHttpService: DynamicAssetmixOptimizerHttpService) {}
@@ -59,7 +56,7 @@ export class RegistrationState {
   registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: Register) {
     const formModel = action.payload.registrationForm.model;
     const newUserModel = new RegistrationUserModel(formModel.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear);
-    setState(new RegistrationStateModel(newUserModel, false, true, []));
+    setState(new RegistrationStateModel(newUserModel, RegistrationPageStatus.CALCULATION_ASSETMIX, []));
     this.store.dispatch(new OptimizeAllocationStrategy());
   }
 
@@ -68,7 +65,7 @@ export class RegistrationState {
     const currentState = getState();
     const result: DynamicStrategyResponseJson = await this.dynamicAssetmixOptimizerHttpService.getDynamicStrategy(currentState);
 
-    setState(new RegistrationStateModel(currentState.model, true, false, []));
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CREATING_CONTRACT, []));
     this.store.dispatch(new SubscribeContract(result));
   }
 
@@ -88,6 +85,6 @@ export class RegistrationState {
       dynamicStrategy.wealth,
       dynamicStrategy.t
     );
-    setState(new RegistrationStateModel(currentState.model, false, false, []));
+    setState(new RegistrationStateModel(currentState.model, RegistrationPageStatus.CONFIRMATION, []));
   }
 }

@@ -4,6 +4,8 @@
   </mat-card-header>
   <mat-card-content>
 
+    {{registration$ | async | json}}
+
     <app-registration-form></app-registration-form>
 
     <app-loading description="Calculation optimal asset allocation..."></app-loading>
