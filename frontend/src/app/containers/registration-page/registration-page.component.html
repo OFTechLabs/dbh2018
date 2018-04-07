@@ -18,3 +18,13 @@
     <app-loading description="Creating smart contract with optimal allocation..."></app-loading>
   </mat-card-content>
 </mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CONFIRMATION">
+  <mat-card-content>
+    Oke? Charts? Summary!
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary">Confirm</button>
+    <button mat-button color="warn">Cancel</button>
+  </mat-card-actions>
+</mat-card>
