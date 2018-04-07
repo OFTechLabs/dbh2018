@@ -20,8 +20,5 @@ export class RegistrationFormComponent implements OnInit {
 
   ngOnInit() {}
 
-  async onSubmit() {
-    const year = await BlockchainHttpService.getYear();
-    console.log(year);
-  }
+  onSubmit() {}
 }
