@@ -39,6 +39,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 import { LoadingComponent } from './components/loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
+import { BlockchainHttpService } from './services/blockchain/blockchain.http.service';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -84,7 +85,7 @@ const MATERIAL_MODULES = [
     ReactiveFormsModule,
     HttpClientModule
   ],
-  providers: [DynamicAssetmixOptimizerHttpService],
+  providers: [DynamicAssetmixOptimizerHttpService, BlockchainHttpService],
   bootstrap: [AppComponent]
 })
 export class AppModule {}
