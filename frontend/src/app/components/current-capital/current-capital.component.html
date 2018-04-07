@@ -1,3 +1,7 @@
 <div>
-  You currently have <span class="feasibility-percentage">{{currentCapital | currency:'EUR':'symbol':'2.0-0'}}</span>
+  <h2>Your current capital</h2>
+  <div class="target-amount">{{currentCapital | currency:'EUR':'symbol':'2.0-0'}}</div>
+  <div class="meta-info">
+    As of {{currentMonth}} {{currentYear}}
+  </div>
 </div>
