@@ -35,7 +35,7 @@ export class BlockchainHttpService {
     return await this.contract.total_balance();
   }
 
-  public async settings(address: string): Promise<UserSetttings> {
+  public async settings(address: number): Promise<UserSetttings> {
     return await this.contract.settings(address);
   }
 }
