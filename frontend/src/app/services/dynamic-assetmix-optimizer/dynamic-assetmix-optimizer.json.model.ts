@@ -34,5 +34,5 @@ export interface DynamicStrategyResponseJson {
 }
 
 export interface DynamicStrategyResponseJson {
-  'Probablity terminal wealth exceeds target': number;
+  Probablity_terminal_wealth_exceeds_target: number;
 }
