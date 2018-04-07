@@ -24,3 +24,8 @@ h1,
 h2 {
   color: $ortec-blue;
 }
+
+mat-toolbar {
+  min-height: 80px;
+  max-height: 80px;
+}

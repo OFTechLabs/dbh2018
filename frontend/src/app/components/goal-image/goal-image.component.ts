@@ -8,7 +8,7 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GoalImageComponent implements OnInit {
   @Input() goalDescription: string;
 
-  goalImages: Map<String, String> = {};
+  goalImages: Map<String, String> = new Map<String, String>();
 
   constructor() {
     this.goalImages['Car'] = './assets/car-ride.png';
