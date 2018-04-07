@@ -20,9 +20,9 @@ export class DynamicAssetmixOptimizerHttpService {
 
   async getDynamicStrategy(registration: RegistrationStateModel): Promise<DynamixStrategyResponseJson> {
     const requestJson: DynamicStrategyRequestJson = {
-      initial_wealth: registration.initialWealth,
-      wealth_target: registration.targetWealth,
-      periodic_cashflow: registration.annualContribution,
+      initial_wealth: registration.model.initialWealth,
+      wealth_target: registration.model.targetWealth,
+      periodic_cashflow: registration.model.annualContribution,
       investment_horizon: 40 // todo
     };
 
