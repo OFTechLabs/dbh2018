@@ -1,7 +1,8 @@
-import { Action, State, StateContext } from '@ngxs/store';
-import { RegisterAction, SubscribeContractAction } from './registration.action';
-import { Store } from '@ngxs/store';
+import { Action, State, StateContext, Store } from '@ngxs/store';
+import { OptimizeAllocationStrategy, Register, SubscribeContract } from './registration.action';
 import { BlockchainHttpService } from '../services/blockchain/blockchain.http.service';
+import { DynamicAssetmixOptimizerHttpService } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
+import { DynamicStrategyResponseJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
 
 export class RegistrationUserModel {
   constructor(private _description: string, private _initialWealth: number, private _annualContribution: number, private _targetWealth: number, private _targetYear: number) {}
@@ -28,14 +29,18 @@ export class RegistrationUserModel {
 }
 
 export class RegistrationStateModel {
-  constructor(private _model: RegistrationUserModel, private _loading: boolean, private _errors: { error: string }[]) {}
+  constructor(private _model: RegistrationUserModel, private _loadingSmartContract: boolean, private _loadingAssetOptimization: boolean, private _errors: { error: string }[]) {}
 
   get model(): RegistrationUserModel {
     return this._model;
   }
 
-  get loading(): boolean {
-    return this._loading;
+  get loadingSmartContract(): boolean {
+    return this._loadingSmartContract;
+  }
+
+  get loadingAssetOptimization(): boolean {
+    return this._loadingAssetOptimization;
   }
 
   get errors(): { error: string }[] {
@@ -45,26 +50,44 @@ export class RegistrationStateModel {
 
 @State<RegistrationStateModel>({
   name: 'registration',
-  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), false, [])
+  defaults: new RegistrationStateModel(new RegistrationUserModel('', 0, 0, 0, 0), false, false, [])
 })
 export class RegistrationState {
-  constructor(private store: Store) {}
+  constructor(private store: Store, private dynamicAssetmixOptimizerHttpService: DynamicAssetmixOptimizerHttpService) {}
 
-  @Action(RegisterAction)
-  registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: RegisterAction) {
+  @Action(Register)
+  registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: Register) {
     const formModel = action.payload.registrationForm.model;
     const newUserModel = new RegistrationUserModel(formModel.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear);
-    setState(new RegistrationStateModel(newUserModel, true, []));
-    this.store.dispatch(new SubscribeContractAction());
+    setState(new RegistrationStateModel(newUserModel, false, true, []));
+    this.store.dispatch(new OptimizeAllocationStrategy());
   }
 
-  @Action(SubscribeContractAction)
-  async subscribeToContract({ getState, setState }: StateContext<RegistrationStateModel>, action: SubscribeContractAction) {
+  @Action(OptimizeAllocationStrategy)
+  async optimizeAllocationStrategy({ getState, setState }: StateContext<RegistrationStateModel>) {
+    const currentState = getState();
+    const result: DynamicStrategyResponseJson = await this.dynamicAssetmixOptimizerHttpService.getDynamicStrategy(currentState);
+
+    setState(new RegistrationStateModel(currentState.model, true, false, []));
+    this.store.dispatch(new SubscribeContract(result));
+  }
+
+  @Action(SubscribeContract)
+  async subscribeToContract({ getState, setState }: StateContext<RegistrationStateModel>, action: SubscribeContract) {
     const currentState = getState();
 
     const currentYear = new Date().getFullYear();
     const horizon = currentState.model.targetYear - currentYear;
-    await BlockchainHttpService.subscribe(currentState.model.initialWealth, currentState.model.targetWealth, horizon, 0, 50000000, 0);
-    setState(new RegistrationStateModel(currentState.model, false, []));
+    const dynamicStrategy: DynamicStrategyResponseJson = action.dynamicStrategy;
+
+    await BlockchainHttpService.subscribe(
+      currentState.model.initialWealth,
+      currentState.model.targetWealth,
+      horizon,
+      dynamicStrategy.constant,
+      dynamicStrategy.wealth,
+      dynamicStrategy.t
+    );
+    setState(new RegistrationStateModel(currentState.model, false, false, []));
   }
 }

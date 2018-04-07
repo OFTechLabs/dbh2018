@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngxs/store';
-import { RegisterAction } from '../../model/registration.action';
+import { Register } from '../../model/registration.action';
 import 'rxjs/add/operator/map';
 import { BlockchainHttpService } from '../../services/blockchain/blockchain.http.service';
 
@@ -33,12 +33,8 @@ export class RegistrationFormComponent implements OnInit {
     this.store
       .selectOnce(state => state.registrationstate)
       .map(selected => {
-        this.store.dispatch(new RegisterAction(selected));
+        this.store.dispatch(new Register(selected));
       })
       .subscribe();
-
-    const result = await BlockchainHttpService.totalBalance();
-    console.log(result);
-    BlockchainHttpService.showContractWords();
   }
 }

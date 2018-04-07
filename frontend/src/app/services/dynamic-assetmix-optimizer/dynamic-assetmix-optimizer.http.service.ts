@@ -3,7 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { RegistrationStateModel } from '../../model/registration.state';
 import {
   DynamicStrategyRequestJson,
-  DynamixStrategyResponseJson,
+  DynamicStrategyResponseJson,
   QuantilesResultJson,
   TerminalWealthRequestJson,
   TerminalWealthResponseJson,
@@ -18,7 +18,7 @@ const QUANTILES = [10, 50, 90];
 export class DynamicAssetmixOptimizerHttpService {
   constructor(private http: HttpClient) {}
 
-  async getDynamicStrategy(registration: RegistrationStateModel): Promise<DynamixStrategyResponseJson> {
+  async getDynamicStrategy(registration: RegistrationStateModel): Promise<DynamicStrategyResponseJson> {
     const requestJson: DynamicStrategyRequestJson = {
       initial_wealth: registration.model.initialWealth,
       wealth_target: registration.model.targetWealth,
@@ -26,7 +26,7 @@ export class DynamicAssetmixOptimizerHttpService {
       investment_horizon: 40 // todo
     };
 
-    return this.http.post<DynamixStrategyResponseJson>(API_ROOT + '/get_dynamic_strategy', requestJson).toPromise();
+    return this.http.post<DynamicStrategyResponseJson>(API_ROOT + '/get_dynamic_strategy', requestJson).toPromise();
   }
 
   async getTerminalWealth(userSettings: UserSetttings): Promise<TerminalWealthResponseJson> {

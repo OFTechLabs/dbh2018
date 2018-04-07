@@ -27,7 +27,7 @@ export interface TerminalWealthResponseJson {
   [key: string]: number;
 }
 
-export interface DynamixStrategyResponseJson {
+export interface DynamicStrategyResponseJson {
   constant: number;
   t: number;
   wealth: number;

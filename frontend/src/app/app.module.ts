@@ -38,6 +38,7 @@ import { RegistrationFormState } from './containers/registration-form/registrati
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
 import { LoadingComponent } from './components/loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -80,7 +81,8 @@ const MATERIAL_MODULES = [
     NgxsModule.forRoot([RegistrationState, RegistrationFormState]),
     NgxsFormPluginModule.forRoot(),
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    HttpClientModule
   ],
   providers: [DynamicAssetmixOptimizerHttpService],
   bootstrap: [AppComponent]

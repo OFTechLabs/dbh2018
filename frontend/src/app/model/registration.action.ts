@@ -1,13 +1,20 @@
 import { RegistrationFormStateModel } from '../containers/registration-form/registration-form.state';
+import { DynamicStrategyResponseJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
 
-export class RegisterAction {
+export class Register {
   static readonly type = '[Registration] Register action';
 
   constructor(public payload: RegistrationFormStateModel) {}
 }
 
-export class SubscribeContractAction {
+export class SubscribeContract {
   static readonly type = '[Registration] Subscribe to Contract action';
+
+  constructor(public dynamicStrategy: DynamicStrategyResponseJson) {}
+}
+
+export class OptimizeAllocationStrategy {
+  static readonly type = '[Registration] Optimize allocation strategy';
 
   constructor() {}
 }
