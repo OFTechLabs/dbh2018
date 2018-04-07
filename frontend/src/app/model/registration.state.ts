@@ -1,6 +1,5 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { RegisterAction } from './registration.action';
-import { RegistrationFormStateModel } from '../containers/registration-form/registration-form.state';
 
 export class RegistrationStateModel {
   constructor(private _description: string, private _initialWealth: number, private _annualContribution: number, private _targetWealth: number, private _targetYear: number) {}
