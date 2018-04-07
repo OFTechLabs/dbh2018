@@ -37,7 +37,19 @@ export class BlockchainHttpService {
   }
 
   public async settings(address: number): Promise<UserSetttings> {
-    return await this.contract.settings(address);
+    const array = await this.contract.settings(address);
+    return {
+      referenceAddress: array[0],
+      balance: array[1],
+      t_start: array[2],
+      goal: array[3],
+      horizon: array[4],
+      beta0: array[5],
+      beta1: array[6],
+      beta2: array[7],
+      fbonds: array[8],
+      fstock: array[9]
+    };
   }
 }
 
