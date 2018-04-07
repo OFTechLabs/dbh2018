@@ -13,3 +13,8 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 mat-card {
   margin-bottom: $default-card-spacing;
 }
+
+.main-section {
+  background: #ffffff url('./assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
