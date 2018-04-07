@@ -51,6 +51,10 @@ contract DynamicStrategy  {
 	uint256 public total_users;
 	int256 public total_balance;
 
+	mapping(uint256 => int256) public stockRetuns;
+	mapping(uint256 => int256) public bondReturns;
+	
+
 	function DynamicStrategy() public {
 		currentYear = 2018;
 	}
@@ -99,7 +103,7 @@ contract DynamicStrategy  {
 		return true;
 	}
 
-	function reallocate(address user) public existuser returns(bool) {
+	function reallocate(address user) internal existuser returns(bool) {
 		
 		uint256 startYear = usersData[user].startYear;
 
@@ -122,7 +126,7 @@ contract DynamicStrategy  {
 		return true;		
 	}
 	
-	function makerecord(address user) private existuser returns(bool) {
+	function makerecord(address user) internal existuser returns(bool) {
 		uint256 elapsedYears = usersData[user].elapsedYears;
 		usersData[user].balanceHistory[elapsedYears] = usersData[user].balance;
 		usersData[user].yearHistory[elapsedYears] = currentYear;
@@ -132,14 +136,31 @@ contract DynamicStrategy  {
 		return true;
 	}
 
-
-	function update() public returns(bool){
-	    currentYear++;
-	    for(uint256 i = 0; i < uint256(total_users); i++) {
-	        require(reallocate(users[i]));
-	        require(makerecord(users[i]));
-	    }
+	function processReturns(address user) internal existuser returns(bool) {
+    	int256 factor = ((1e9 + stockRetuns[currentYear])*usersData[user].currentStock)/1e9 
+    		+ ((1e9 + bondReturns[currentYear])*usersData[user].currentBond)/1e9;
+    	int256 accruedReturn = (usersData[user].balance*(factor - 1e9))/1e9;	    
+	    total_balance+= accruedReturn;	 
+	    usersData[user].balance+= accruedReturn;
 	    return true;
-	}
+    }
+
+	function setMarketData(uint[] timeStamps, int[] newStockReturns, int[] newBondReturns) public returns(bool) {    
+	    for(uint i = 0; i < timeStamps.length; i++) {
+	    	stockRetuns[timeStamps[i]] = newStockReturns[i];
+	    	bondReturns[timeStamps[i]] = newBondReturns[i];
+	    }
+    return true;
+  }
+
+  function update() public returns(bool){
+    currentYear++;
+    for(uint256 i = 0; i < uint256(total_users); i++) {
+        require(processReturns(users[i]));
+        require(reallocate(users[i]));
+        require(makerecord(users[i]));
+    }
+    return true;
+  }
 }
 
