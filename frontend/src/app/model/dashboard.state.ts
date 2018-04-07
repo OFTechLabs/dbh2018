@@ -1,6 +1,8 @@
 import { Action, State, StateContext } from '@ngxs/store';
 import { LoadDashboard } from './dashboard.actions';
 import { BlockchainHttpService } from '../services/blockchain/blockchain.http.service';
+import { DynamicAssetmixOptimizerHttpService } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
+import { QuantilesResultJson } from '../services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.json.model';
 
 export class DasboardUserModel {
   constructor(
@@ -28,7 +30,7 @@ export class DashboardModel {
   defaults: new DashboardModel(null, null, true)
 })
 export class DashboardState {
-  constructor(private blockchainHttpService: BlockchainHttpService) {}
+  constructor(private blockchainHttpService: BlockchainHttpService, private dynamicAssetMiOptimizer: DynamicAssetmixOptimizerHttpService) {}
 
   @Action(LoadDashboard)
   async loadUserModel({ getState, setState }: StateContext<DashboardModel>, action: LoadDashboard) {
@@ -48,9 +50,26 @@ export class DashboardState {
   async loadResultsModel({ getState, setState }: StateContext<DashboardModel>, action: LoadDashboard) {
     const currentState = getState();
 
-    const newResultsModel = new DashboardResultsModel(0, [], [], [], []);
+    const settings = await this.blockchainHttpService.settings(1);
+    const quantiles: QuantilesResultJson = await this.dynamicAssetMiOptimizer.getWealthQuantiles(settings);
+
+    const pointOne = this.getValuesFromquantile(quantiles['0.10']);
+    const pointFive = this.getValuesFromquantile(quantiles['0.50']);
+    const pointNine = this.getValuesFromquantile(quantiles['0.90']);
+
+    const newResultsModel = new DashboardResultsModel(0, [], pointNine, pointFive, pointOne);
     const doneLoading = currentState.userModel !== null;
     const newModel = new DashboardModel(currentState.userModel, newResultsModel, doneLoading);
     setState(newModel);
+  }
+
+  private getValuesFromquantile(quantiles: { [key: string]: number }): number[] {
+    const values: number[] = [];
+    for (const key in Object.keys(quantiles)) {
+      if (quantiles.hasOwnProperty(key)) {
+        values.push(quantiles[key]);
+      }
+    }
+    return values;
   }
 }
