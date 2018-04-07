@@ -127,18 +127,18 @@ contract DynamicStrategy  {
 		usersData[user].balanceHistory[elapsedYears] = usersData[user].balance;
 		usersData[user].yearHistory[elapsedYears] = currentYear;
 		usersData[user].bondHistory[elapsedYears] = usersData[user].currentBond;
-		usersData[user].stockHistory[elapsedYears] = usersData[user].currentStock;		
+		usersData[user].stockHistory[elapsedYears] = usersData[user].currentStock;
 		usersData[user].elapsedYears++;
 		return true;
 	}
 
 
 	function update() public returns(bool){
+	    currentYear++;
 	    for(uint256 i = 0; i < uint256(total_users); i++) {
 	        require(reallocate(users[i]));
 	        require(makerecord(users[i]));
 	    }
-	    currentYear++;
 	    return true;
 	}
 }
