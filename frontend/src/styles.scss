@@ -12,6 +12,7 @@ $candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-
 
 mat-card {
   margin-bottom: $default-card-spacing;
+  border-radius: 10px !important;
 }
 
 .main-section {
