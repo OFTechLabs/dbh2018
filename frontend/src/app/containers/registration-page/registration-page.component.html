@@ -27,10 +27,11 @@
 </mat-card>
 
 <mat-card *ngIf="(status$ | async) === registationPageStatusses.FORM">
-  <mat-card-header>
-    <mat-card-title><h2>Registration</h2></mat-card-title>
-  </mat-card-header>
   <mat-card-content>
+    <div class="form-header">
+      <div><app-goal-image [goalDescription]="(registrationState$ | async)?.model.description"></app-goal-image></div>
+      <h1>Please enter more information to reach your goal</h1>
+    </div>
     <app-registration-form></app-registration-form>
   </mat-card-content>
 </mat-card>

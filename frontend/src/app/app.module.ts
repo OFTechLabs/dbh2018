@@ -45,6 +45,7 @@ import { BlockchainHttpService } from './services/blockchain/blockchain.http.ser
 import { DashboardState } from './model/dashboard.state';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
 import { ImageHoverComponent } from './components/image-hover/image-hover.component';
+import { GoalImageComponent } from './components/goal-image/goal-image.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -80,7 +81,8 @@ const MATERIAL_MODULES = [
     RegistrationFormComponent,
     LoadingComponent,
     ConfirmationComponent,
-    ImageHoverComponent
+    ImageHoverComponent,
+    GoalImageComponent
   ],
   imports: [
     BrowserModule,
