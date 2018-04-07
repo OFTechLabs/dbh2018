@@ -10,15 +10,9 @@ export class BlockchainHttpService {
   constructor() {}
 
   async bootstrapWeb3() {
-    if (typeof (window as any).web3 !== 'undefined') {
-      this.web3 = new Web3((window as any).web3.currentProvider);
-    } else {
-      console.log('No web3? You should consider trying MetaMask!');
-      Web3.providers.HttpProvider.prototype.sendAsync = Web3.providers.HttpProvider.prototype.send;
-      this.web3 = new Web3(new Web3.providers.HttpProvider('http://ec2-18-184-38-165.eu-central-1.compute.amazonaws.com:8545/'));
-      this.web3.eth.defaultAccount = '0x731a10897d267e19B34503aD902d0A29173Ba4B1';
-      this.contract = this.web3.eth.contract(abiArray).at('0x731a10897d267e19B34503aD902d0A29173Ba4B1');
-    }
+    this.web3 = new Web3(new Web3.providers.HttpProvider('http://ec2-18-184-38-165.eu-central-1.compute.amazonaws.com:8545/'));
+    this.contract = this.web3.eth.contract(abiArray).at('0x731a10897d267e19B34503aD902d0A29173Ba4B1');
+    this.web3.eth.defaultAccount = '0x00a329c0648769A73afAc7F9381E08FB43dBEA72';
   }
 
   public async subscribe(amount: number, goal: number, horizon: number, beta0: number, beta1: number, beta2: number): Promise<boolean> {

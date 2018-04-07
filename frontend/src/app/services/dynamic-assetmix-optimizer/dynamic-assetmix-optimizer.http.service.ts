@@ -11,7 +11,7 @@ import {
 } from './dynamic-assetmix-optimizer.json.model';
 import { UserSetttings } from '../blockchain/blockchain.http.service';
 
-const API_ROOT = 'http://ec2-35-156-214-22.eu-central-1.compute.amazonaws.com:5000';
+const API_ROOT = 'http://ec2-35-156-214-22.eu-central-1.compute.amazonaws.com:5000/api';
 const QUANTILES = [10, 50, 90];
 
 @Injectable()
