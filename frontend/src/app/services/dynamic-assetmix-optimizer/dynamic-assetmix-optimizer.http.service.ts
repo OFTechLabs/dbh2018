@@ -12,7 +12,7 @@ import {
 import { UserSetttings } from '../blockchain/blockchain.http.service';
 
 const API_ROOT = 'http://ec2-35-156-214-22.eu-central-1.compute.amazonaws.com:5000/api';
-const QUANTILES = [10, 50, 90];
+const QUANTILES = [0.1, 0.5, 0.9];
 
 @Injectable()
 export class DynamicAssetmixOptimizerHttpService {
@@ -33,17 +33,15 @@ export class DynamicAssetmixOptimizerHttpService {
   }
 
   async getTerminalWealth(userSettings: UserSetttings): Promise<TerminalWealthResponseJson> {
-    const requestJson: TerminalWealthRequestJson = {
-      initial_wealth: userSettings.balance,
-      wealth_target: userSettings.goal,
-      periodic_cashflow: 100, // todo
-      investment_horizon: userSettings.horizon,
-      constant: userSettings.beta0,
-      coeff_wealth: userSettings.beta1,
-      coeff_t: userSettings.beta2
-    };
+    const requestJson = this.createTerminalWealthRequest(userSettings);
 
     return this.http.post<TerminalWealthResponseJson>(API_ROOT + '/get_terminal_wealth', requestJson).toPromise();
+  }
+
+  async getSuccesProbabilityDynamicStrategy(userSettings: UserSetttings): Promise<DynamicStrategyResponseJson> {
+    const requestJson = this.createTerminalWealthRequest(userSettings);
+
+    return this.http.post<DynamicStrategyResponseJson>(API_ROOT + '/get_succes_probability_dynamic_strategy', requestJson).toPromise();
   }
 
   async getWealthQuantiles(userSettings: UserSetttings): Promise<QuantilesResultJson> {
@@ -58,6 +56,18 @@ export class DynamicAssetmixOptimizerHttpService {
       quantiles: QUANTILES
     };
 
-    return this.http.post<QuantilesResultJson>(API_ROOT + '/get_wealth_quantiles', requestJson).toPromise();
+    return this.http.post<QuantilesResultJson>(API_ROOT + '/get_wealth_quantiles_dynamic_strategy', requestJson).toPromise();
+  }
+
+  private createTerminalWealthRequest(userSettings: UserSetttings) {
+    return {
+      initial_wealth: userSettings.balance,
+      wealth_target: userSettings.goal,
+      periodic_cashflow: 100, // todo
+      investment_horizon: userSettings.horizon,
+      constant: userSettings.beta0,
+      coeff_wealth: userSettings.beta1,
+      coeff_t: userSettings.beta2
+    };
   }
 }
