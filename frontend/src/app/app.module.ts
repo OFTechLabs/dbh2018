@@ -16,7 +16,8 @@ import {
   MatSelectModule,
   MatSidenavModule,
   MatSnackBarModule,
-  MatToolbarModule
+  MatToolbarModule,
+  MatTooltipModule
 } from '@angular/material';
 
 import { AppComponent } from './app.component';
@@ -43,6 +44,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { BlockchainHttpService } from './services/blockchain/blockchain.http.service';
 import { DashboardState } from './model/dashboard.state';
 import { ConfirmationComponent } from './components/confirmation/confirmation.component';
+import { ImageHoverComponent } from './components/image-hover/image-hover.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -57,7 +59,8 @@ const MATERIAL_MODULES = [
   MatFormFieldModule,
   MatInputModule,
   MatSelectModule,
-  MatProgressBarModule
+  MatProgressBarModule,
+  MatTooltipModule
 ];
 
 @NgModule({
@@ -76,7 +79,8 @@ const MATERIAL_MODULES = [
     ReturnCardComponent,
     RegistrationFormComponent,
     LoadingComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    ImageHoverComponent
   ],
   imports: [
     BrowserModule,

@@ -7,17 +7,21 @@
     'goal feasibility current-capital'
     'return return return';
   grid-auto-columns: 1fr;
+  padding-top: 50px;
 }
 
 .goal {
+  position: relative;
   grid-area: goal;
 }
 
 .feasibility {
+  position: relative;
   grid-area: feasibility;
 }
 
 .current-capital {
+  position: relative;
   grid-area: current-capital;
 }
 
@@ -28,4 +32,11 @@
 .small {
   color: white;
   background-color: $ortec-blue;
+}
+
+.icon {
+  position: absolute;
+  //top: -138px;
+  left: 0;
+  margin-top: -99px !important;
 }
