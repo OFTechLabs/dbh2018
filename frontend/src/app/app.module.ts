@@ -22,8 +22,8 @@ import {
 
 import { AppComponent } from './app.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
-import { DashboardPageComponent } from './containers/dashboard-page/dashboard-page.component';
-import { RegistrationPageComponent } from './containers/registration-page/registration-page.component';
+import { DashboardPageComponent } from './pages/dashboard-page/dashboard-page.component';
+import { RegistrationPageComponent } from './pages/registration-page/registration-page.component';
 import { ReturnChartComponent } from './components/return-chart/return-chart.component';
 import { CurrentCapitalComponent } from './components/current-capital/current-capital.component';
 import { GoalComponent } from './components/goal/goal.component';
