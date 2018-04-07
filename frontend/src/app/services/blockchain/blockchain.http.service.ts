@@ -5,8 +5,8 @@ import BigNumber from 'web3/bower/bignumber.js/bignumber';
 
 @Injectable()
 export class BlockchainHttpService {
-  public web3: Web3;
-  public contract;
+  private web3: Web3;
+  private contract;
 
   constructor() {}
 
@@ -20,48 +20,25 @@ export class BlockchainHttpService {
     return await this.contract.subscribe(amount, goal, horizon, beta0, beta1, beta2);
   }
 
-  public async setcurrenttime(year: number): Promise<boolean> {
-    return await this.contract.setcurrenttime(year);
-  }
-
-  public async users(input: number): Promise<any> {
-    return await this.contract.users(input);
-  }
-
-  public async update(): Promise<boolean> {
-    return await this.contract.update();
-  }
-
-  public async totalBalance(): Promise<number> {
-    return await this.contract.total_balance();
-  }
-
   public async settings(address: string): Promise<UserSetttings> {
-    const array = await this.contract.settings(address);
-    return {
-      referenceAddress: array[0],
-      balance: array[1],
-      t_start: array[2],
-      goal: array[3],
-      horizon: array[4],
-      beta0: array[5],
-      beta1: array[6],
-      beta2: array[7],
-      fbonds: array[8],
-      fstock: array[9]
-    };
+    return await this.contract.settings(address);
   }
 }
 
 export interface UserSetttings {
   referenceAddress: string;
   balance: BigNumber;
-  t_start: BigNumber;
+  balanceHistory: BigNumber[];
+  startYear: BigNumber;
+  elapsedYears: BigNumber;
+  yearHistory: BigNumber[];
   goal: BigNumber;
   horizon: BigNumber;
   beta0: BigNumber;
   beta1: BigNumber;
   beta2: BigNumber;
-  fbonds: BigNumber;
-  fstock: BigNumber;
+  currentBond: BigNumber;
+  currentStock: BigNumber;
+  bondHistory: BigNumber[];
+  stockHistory: BigNumber[];
 }
