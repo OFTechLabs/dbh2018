@@ -37,6 +37,7 @@ import { RegistrationFormComponent } from './containers/registration-form/regist
 import { RegistrationFormState } from './containers/registration-form/registration-form.state';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { DynamicAssetmixOptimizerHttpService } from './services/dynamic-assetmix-optimizer/dynamic-assetmix-optimizer.http.service';
+import { LoadingComponent } from './components/loading/loading.component';
 
 const MATERIAL_MODULES = [
   MatButtonModule,
@@ -67,7 +68,8 @@ const MATERIAL_MODULES = [
     GoalCardComponent,
     CurrentCapitalCardComponent,
     ReturnCardComponent,
-    RegistrationFormComponent
+    RegistrationFormComponent,
+    LoadingComponent
   ],
   imports: [
     BrowserModule,
