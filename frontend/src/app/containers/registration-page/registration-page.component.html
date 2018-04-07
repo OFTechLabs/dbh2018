@@ -1,16 +1,20 @@
-<mat-card>
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.FORM">
   <mat-card-header>
     <mat-card-title><h2>Registration</h2></mat-card-title>
   </mat-card-header>
   <mat-card-content>
-
-    {{registration$ | async | json}}
-
     <app-registration-form></app-registration-form>
+  </mat-card-content>
+</mat-card>
 
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CALCULATION_ASSETMIX">
+  <mat-card-content>
     <app-loading description="Calculation optimal asset allocation..."></app-loading>
+  </mat-card-content>
+</mat-card>
 
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CREATING_CONTRACT">
+  <mat-card-content>
     <app-loading description="Creating smart contract with optimal allocation..."></app-loading>
-
   </mat-card-content>
 </mat-card>
