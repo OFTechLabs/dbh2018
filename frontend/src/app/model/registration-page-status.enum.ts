@@ -1,0 +1,6 @@
+export enum RegistrationPageStatus {
+  FORM,
+  CALCULATION_ASSETMIX,
+  CREATING_CONTRACT,
+  CONFIRMATION
+}

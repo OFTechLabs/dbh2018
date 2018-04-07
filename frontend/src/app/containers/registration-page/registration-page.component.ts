@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Select } from '@ngxs/store';
+import { RegistrationState, RegistrationStateModel } from '../../model/registration.state';
+import { Observable } from 'rxjs/Observable';
 
 @Component({
   selector: 'app-registration-page',
@@ -6,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./registration-page.component.scss']
 })
 export class RegistrationPageComponent implements OnInit {
-  constructor() {}
+  @Select(RegistrationState) registration$: Observable<RegistrationStateModel>;
 
   ngOnInit() {}
 }
