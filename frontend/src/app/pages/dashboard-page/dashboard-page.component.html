@@ -32,7 +32,7 @@
     <mat-card-content>
       <app-return-card [contractStartYear]="currentYear"
                        [currentYear]="currentYear"
-                       [realization]="[dashboard$ | async].results.realization"
+                       [realization]="(dashboard$ | async).results.realization"
                        [simulationBad]="(dashboard$ | async).results.simulationBad"
                        [simulationExpected]="(dashboard$ | async).results.simulationExpected"
                        [simulationGood]="(dashboard$ | async).results.simulationGood"

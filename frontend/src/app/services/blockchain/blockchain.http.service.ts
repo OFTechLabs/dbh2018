@@ -93,7 +93,7 @@ export class BlockchainHttpService {
   }
 
   private async sleep(): Promise<any> {
-    return new Promise(resolve => setTimeout(resolve, 500));
+    return new Promise(resolve => setTimeout(resolve, 1000));
   }
 
   private async doApiCallReturnFirstResult(methodName: string) {
