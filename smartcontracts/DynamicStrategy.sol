@@ -1,4 +1,4 @@
-pragma solidity ^0.4.21;
+pragma solidity 0.4.8;
 
 contract DynamicStrategy  {
 	
@@ -35,16 +35,6 @@ contract DynamicStrategy  {
 	    return true;
 	}
 
-	modifier newuser {
-		require(usersData[msg.sender].referenceAddress == address(0));
-		_;
-	}
-
-	modifier existuser {
-		require(usersData[msg.sender].referenceAddress != address(0));
-		_;
-	}		
-
 	mapping(address => UserData) public usersData;
 	address[] public users;
 
@@ -59,23 +49,25 @@ contract DynamicStrategy  {
 		currentYear = 2018;
 	}
 	
-	function getBalanceHistory(address user) public view returns (int256[100]) {
+	function getBalanceHistory(address user) public returns (int256[100]) {
 	    return usersData[user].balanceHistory;
 	}
 	
-	function getYearHistory(address user) public view returns (uint256[100]) {
+	function getYearHistory(address user) public returns (uint256[100]) {
 	    return usersData[user].yearHistory;
 	}
 	
-	function getBondHistory(address user) public view returns (int256[100]) {
+	function getBondHistory(address user) public returns (int256[100]) {
 	    return usersData[user].bondHistory;
 	}
 	
-	function getStockHistory(address user) public view returns (int256[100]) {
+	function getStockHistory(address user) public returns (int256[100]) {
 	    return usersData[user].stockHistory;
 	}
 
-	function subscribe(int256 balance, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public newuser returns(bool) {		
+	function subscribe(int256 balance, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public returns(bool) {		
+	    if(usersData[msg.sender].referenceAddress != address(0)) throw;
+	    
 	    users.push(msg.sender);
 		
 		total_users++;
@@ -89,7 +81,7 @@ contract DynamicStrategy  {
 		usersData[msg.sender].beta0 = beta0;
 		usersData[msg.sender].beta1 = beta1;
 		usersData[msg.sender].beta2 = beta2;
-		usersData[msg.sender].currentBond = 1e9;
+		usersData[msg.sender].currentBond = 1000000000;
 		usersData[msg.sender].currentStock = 0;
 
 		reallocate(msg.sender);
@@ -97,13 +89,16 @@ contract DynamicStrategy  {
 		return true;	
 	}
 
-	function deposit(int256 amount) public existuser returns(bool) {
+	function deposit(int256 amount) public returns(bool) {
+	    if(usersData[msg.sender].referenceAddress == address(0)) throw;
+	    
 		usersData[msg.sender].balance += amount;
 		total_balance += amount;
 		return true;
 	}
 
-	function reallocate(address user) internal existuser returns(bool) {
+	function reallocate(address user) internal returns(bool) {
+		if(usersData[msg.sender].referenceAddress == address(0)) throw;
 		
 		uint256 startYear = usersData[user].startYear;
 
@@ -114,11 +109,11 @@ contract DynamicStrategy  {
 		int256 wealth = usersData[user].balance;
 
 		int256 fstock = beta0 + beta1*wealth + beta2*int256(currentYear- startYear);
-		int256 fbonds = 1e9 - fstock;		
+		int256 fbonds = 1000000000 - fstock;		
 
-		require(fstock >= 0);
-		require(fbonds >= 0);
-		require(fstock+fbonds == 1e9);
+		if(fstock < 0) throw;
+		if(fbonds < 0) throw;
+		if(fstock+fbonds != 1000000000) throw;
 
 		usersData[user].currentStock = fstock;
 		usersData[user].currentBond = fbonds;
@@ -126,7 +121,9 @@ contract DynamicStrategy  {
 		return true;		
 	}
 	
-	function makerecord(address user) internal existuser returns(bool) {
+	function makerecord(address user) internal returns(bool) {
+	    if(usersData[msg.sender].referenceAddress == address(0)) throw;
+	    
 		uint256 elapsedYears = usersData[user].elapsedYears;
 		usersData[user].balanceHistory[elapsedYears] = usersData[user].balance;
 		usersData[user].yearHistory[elapsedYears] = currentYear;
@@ -136,10 +133,12 @@ contract DynamicStrategy  {
 		return true;
 	}
 
-	function processReturns(address user) internal existuser returns(bool) {
-    	int256 factor = ((1e9 + stockRetuns[currentYear])*usersData[user].currentStock)/1e9 
-    		+ ((1e9 + bondReturns[currentYear])*usersData[user].currentBond)/1e9;
-    	int256 accruedReturn = (usersData[user].balance*(factor - 1e9))/1e9;	    
+	function processReturns(address user) internal returns(bool) {
+	    if(usersData[msg.sender].referenceAddress == address(0)) throw;
+	    
+    	int256 factor = ((1000000000 + stockRetuns[currentYear])*usersData[user].currentStock)/1000000000 
+    		+ ((1000000000 + bondReturns[currentYear])*usersData[user].currentBond)/1000000000;
+    	int256 accruedReturn = (usersData[user].balance*(factor - 1000000000))/1000000000;	    
 	    total_balance+= accruedReturn;	 
 	    usersData[user].balance+= accruedReturn;
 	    return true;
@@ -156,9 +155,9 @@ contract DynamicStrategy  {
   function update() public returns(bool){
     currentYear++;
     for(uint256 i = 0; i < uint256(total_users); i++) {
-        require(processReturns(users[i]));
-        require(reallocate(users[i]));
-        require(makerecord(users[i]));
+        if(!processReturns(users[i])) throw;
+        if(!reallocate(users[i])) throw; 
+        if(!makerecord(users[i])) throw;
     }
     return true;
   }
