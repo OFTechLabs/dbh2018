@@ -41,23 +41,31 @@ export class BlockchainHttpService {
       args: { beta2: beta2, balance: amount, horizon: horizon, beta0: beta0, beta1: beta1, goal: goal }
     };
 
-    return this.http
+    const subscribtion = this.http
       .post<string>(url, req, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
       .toPromise();
+    await this.sleep();
+    return subscribtion;
   }
 
   public async settings(address1: string): Promise<UserSetttings> {
-    const balanceHistory = <number[]>await this.doApiCallReturnFirstResult('getBalanceHistory');
+    await this.sleep();
+    const balanceHistory = <number[]>await this.doApiCallReturnArray('getBalanceHistory');
+    await this.sleep();
     const currentYear = <number>await this.doApiCallReturnFirstResult('getCurrentYear');
-    const yearHistory = <number[]>await this.doApiCallReturnFirstResult('getYearHistory');
-    let stockHistory = <number[]>await this.doApiCallReturnFirstResult('getStockHistory');
-    let bondHistory = <number[]>await this.doApiCallReturnFirstResult('getBondHistory');
+    await this.sleep();
+    const yearHistory = <number[]>await this.doApiCallReturnArray('getYearHistory');
+    await this.sleep();
+    let stockHistory = <number[]>await this.doApiCallReturnArray('getStockHistory');
+    await this.sleep();
+    let bondHistory = <number[]>await this.doApiCallReturnArray('getBondHistory');
+    await this.sleep();
     const userAllocationInStock = <number>await this.doApiCallReturnFirstResult('getUserAllocation') / BILLION_FRACTION;
-
+    await this.sleep();
     const userAllocation = <number[]>await this.doApiCallReturnArray('getUserAllocation');
 
     stockHistory = stockHistory.map(val => val / BILLION_FRACTION);
@@ -71,16 +79,16 @@ export class BlockchainHttpService {
       currentYear: currentYear,
       elapsedYears: userAllocation[3],
       yearHistory: yearHistory,
-      goal: userAllocation[1],
       horizon: userAllocation[4],
-      beta0: 1,
-      beta1: 1,
-      beta2: 1,
       currentBond: 1 - userAllocationInStock,
       currentStock: userAllocationInStock,
       bondHistory: bondHistory,
       stockHistory: stockHistory
     };
+  }
+
+  private async sleep(): Promise<any> {
+    return new Promise(resolve => setTimeout(resolve, 500));
   }
 
   private async doApiCallReturnFirstResult(methodName: string) {
@@ -92,13 +100,19 @@ export class BlockchainHttpService {
         }
       })
       .toPromise();
-    return val.data.contents[0];
+    return Number.parseFloat(val.data.contents[0]);
   }
 
   private async doApiCallReturnArray(methodName: string) {
     const req = BlockchainHttpService.getRequestJsonForMethod(methodName);
-    const val: Response = await this.http.post<Response>(url, req).toPromise();
-    return val.data.contents;
+    const val: Response = await this.http
+      .post<Response>(url, req, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .toPromise();
+    return val.data.contents.map(element => Number.parseFloat(element));
   }
 }
 
@@ -110,11 +124,7 @@ export interface UserSetttings {
   currentYear: number;
   elapsedYears: number;
   yearHistory: number[];
-  goal: number;
   horizon: number;
-  beta0: number;
-  beta1: number;
-  beta2: number;
   currentBond: number;
   currentStock: number;
   bondHistory: number[];

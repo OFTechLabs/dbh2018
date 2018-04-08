@@ -32,42 +32,42 @@ export class DynamicAssetmixOptimizerHttpService {
     return this.http.post<DynamicStrategyResponseJson>(API_ROOT + '/get_dynamic_strategy', requestJson).toPromise();
   }
 
-  async getTerminalWealth(userSettings: UserSetttings): Promise<TerminalWealthResponseJson> {
-    const requestJson = this.createTerminalWealthRequest(userSettings);
+  async getTerminalWealth(wealthTarget: number, userSettings: UserSetttings, stragegy: DynamicStrategyResponseJson): Promise<TerminalWealthResponseJson> {
+    const requestJson = this.createTerminalWealthRequest(wealthTarget, userSettings, stragegy);
 
     return this.http.post<TerminalWealthResponseJson>(API_ROOT + '/get_terminal_wealth', requestJson).toPromise();
   }
 
-  async getSuccesProbabilityDynamicStrategy(userSettings: UserSetttings): Promise<ProbabilityResponseJson> {
-    const requestJson = this.createTerminalWealthRequest(userSettings);
+  async getSuccesProbabilityDynamicStrategy(wealthTarget: number, userSettings: UserSetttings, stragegy: DynamicStrategyResponseJson): Promise<ProbabilityResponseJson> {
+    const requestJson = this.createTerminalWealthRequest(wealthTarget, userSettings, stragegy);
 
     return this.http.post<ProbabilityResponseJson>(API_ROOT + '/get_succes_probability_dynamic_strategy', requestJson).toPromise();
   }
 
-  async getWealthQuantiles(userSettings: UserSetttings): Promise<QuantilesResultJson> {
+  async getWealthQuantiles(wealthTarget: number, userSettings: UserSetttings, stragegy: DynamicStrategyResponseJson): Promise<QuantilesResultJson> {
     const requestJson: WealthQuantilesRequestJson = {
       initial_wealth: userSettings.balance,
-      wealth_target: userSettings.goal,
+      wealth_target: wealthTarget,
       periodic_cashflow: 100, // todo
       investment_horizon: userSettings.horizon,
-      constant: userSettings.beta0,
-      coeff_wealth: userSettings.beta1,
-      coeff_t: userSettings.beta2,
+      constant: stragegy.constant,
+      coeff_wealth: stragegy.wealth,
+      coeff_t: stragegy.t,
       quantiles: QUANTILES
     };
 
     return this.http.post<QuantilesResultJson>(API_ROOT + '/get_wealth_quantiles_dynamic_strategy', requestJson).toPromise();
   }
 
-  private createTerminalWealthRequest(userSettings: UserSetttings) {
+  private createTerminalWealthRequest(wealthTarget: number, userSettings: UserSetttings, stragegy: DynamicStrategyResponseJson) {
     return {
       initial_wealth: userSettings.balance,
-      wealth_target: userSettings.goal,
+      wealth_target: wealthTarget,
       periodic_cashflow: 100, // todo
       investment_horizon: userSettings.horizon,
-      constant: userSettings.beta0,
-      coeff_wealth: userSettings.beta1,
-      coeff_t: userSettings.beta2
+      constant: stragegy.constant,
+      coeff_wealth: stragegy.wealth,
+      coeff_t: stragegy.t
     };
   }
 }
