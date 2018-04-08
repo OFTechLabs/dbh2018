@@ -21,6 +21,17 @@ interface Response {
 export class BlockchainHttpService {
   constructor(private http: HttpClient) {}
 
+  private static getRequestJsonForMethod(apiMethod: string) {
+    return {
+      password: 'admin',
+      method: apiMethod,
+      value: 0,
+      args: {
+        user: admin_address
+      }
+    };
+  }
+
   public async subscribe(amount: number, goal: number, horizon: number, beta0: number, beta1: number, beta2: number): Promise<string> {
     const req = {
       password: admin_pass,
@@ -36,7 +47,7 @@ export class BlockchainHttpService {
     const balanceHistory = <number[]>await this.doApiCall('getBalanceHistory');
     const currentYear = <number>await this.doApiCall('getCurrentYear');
 
-    const userSettings: UserSetttings = {
+    return {
       referenceAddress: address1,
       balance: balanceHistory[balanceHistory.length - 1],
       balanceHistory: balanceHistory,
@@ -54,25 +65,12 @@ export class BlockchainHttpService {
       bondHistory: [],
       stockHistory: []
     };
-
-    return userSettings;
   }
 
   private async doApiCall(methodName: string) {
-    const req = this.getRequestJsonForMethod(methodName);
+    const req = BlockchainHttpService.getRequestJsonForMethod(methodName);
     const val: Response = await this.http.post<Response>(url, req).toPromise();
     return val.data.contents[0];
-  }
-
-  private getRequestJsonForMethod(apiMethod: string) {
-    return {
-      password: 'admin',
-      method: apiMethod,
-      value: 0,
-      args: {
-        user: admin_address
-      }
-    };
   }
 }
 
