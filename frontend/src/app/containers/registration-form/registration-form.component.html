@@ -1,37 +1,30 @@
-<div class="container">
-  <div class="left">
-    <form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()"
-          ngxsForm="registrationstate.registrationForm">
+<form [formGroup]="registrationForm" novalidate (ngSubmit)="onSubmit()"
+      ngxsForm="registrationstate.registrationForm">
 
-      <mat-form-field>
-        <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
-        <span matPrefix>€&nbsp;</span>
-        <span matSuffix>.00</span>
-      </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Initial deposit" type="number" formControlName="initialDeposit">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Annual deposit" type="number" formControlName="annualDeposit">
-        <span matPrefix>€&nbsp;</span>
-        <span matSuffix>.00</span>
-      </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Annual deposit" type="number" formControlName="annualDeposit">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
 
-      <mat-form-field>
-        <input matInput placeholder="Target wealth" type="number" formControlName="targetWealth">
-        <span matPrefix>€&nbsp;</span>
-        <span matSuffix>.00</span>
-      </mat-form-field>
+  <mat-form-field>
+    <input matInput placeholder="Target wealth" type="number" formControlName="targetWealth">
+    <span matPrefix>€&nbsp;</span>
+    <span matSuffix>.00</span>
+  </mat-form-field>
 
-      <mat-form-field>
-        <mat-select placeholder="Target year" formControlName="targetYear">
-          <mat-option *ngFor="let year of years" value="{{year}}">{{year}}</mat-option>
-        </mat-select>
-        <span matPrefix>&nbsp;&nbsp;</span>
-      </mat-form-field>
+  <mat-form-field>
+    <mat-select placeholder="Target year" formControlName="targetYear">
+      <mat-option *ngFor="let year of years" value="{{year}}">{{year}}</mat-option>
+    </mat-select>
+    <span matPrefix>&nbsp;&nbsp;</span>
+  </mat-form-field>
 
-      <button mat-raised-button color="primary">Register</button>
-    </form>
-  </div>
-  <div class="right">
-    <img src="./assets/a.png" alt="">
-  </div>
-</div>
+  <button mat-raised-button color="primary">Register</button>
+</form>

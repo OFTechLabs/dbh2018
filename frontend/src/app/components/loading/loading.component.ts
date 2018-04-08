@@ -10,6 +10,8 @@ export class LoadingComponent implements OnInit {
 
   @Input() imageUrl: string;
 
+  @Input() width: number;
+
   constructor() {}
 
   ngOnInit() {}
