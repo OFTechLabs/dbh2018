@@ -87,11 +87,15 @@ contract DynamicStrategy  {
 	}
 
 	function subscribe(int256 balance, int256 goal, uint256 horizon, int256 beta0, int256 beta1, int256 beta2) public returns(bool) {		
-	    if(usersData[msg.sender].referenceAddress != address(0)) throw;
-	    
-	    users.push(msg.sender);
+	    if(usersData[msg.sender].referenceAddress != address(0)){
+	        total_balance-=usersData[msg.sender].balance;
+	        delete usersData[msg.sender];
+	    } 
+	    else {
+	        users.push(msg.sender);    
+	        total_users++;
+	    }
 		
-		total_users++;
 		total_balance = total_balance + balance;
 		
 		usersData[msg.sender].referenceAddress = msg.sender;
