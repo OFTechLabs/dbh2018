@@ -40,11 +40,11 @@ export class DashboardState {
       action.payload.model.description,
       action.payload.model.initialWealth,
       action.payload.model.annualContribution,
-      settings.goal.toNumber(),
-      settings.balance.toNumber(),
-      settings.horizon.toNumber(),
-      settings.stockHistory[0].toNumber(),
-      settings.bondHistory[0].toNumber()
+      settings.goal,
+      settings.balance,
+      settings.horizon,
+      settings.stockHistory[0],
+      settings.bondHistory[0]
     );
     const currentState = getState();
     const doneLoading = currentState.results !== null;
@@ -64,7 +64,7 @@ export class DashboardState {
     const feasibility = await this.dynamicAssetMiOptimizer.getSuccesProbabilityDynamicStrategy(settings);
     const newResultsModel = new DashboardResultsModel(
       feasibility.Probablity_terminal_wealth_exceeds_target,
-      settings.balanceHistory.map(big => big.toNumber()),
+      settings.balanceHistory.map(big => big),
       pointNine,
       pointFive,
       pointOne

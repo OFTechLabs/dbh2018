@@ -6,7 +6,6 @@ import {
   DynamicStrategyResponseJson,
   ProbabilityResponseJson,
   QuantilesResultJson,
-  TerminalWealthRequestJson,
   TerminalWealthResponseJson,
   WealthQuantilesRequestJson
 } from './dynamic-assetmix-optimizer.json.model';
@@ -47,13 +46,13 @@ export class DynamicAssetmixOptimizerHttpService {
 
   async getWealthQuantiles(userSettings: UserSetttings): Promise<QuantilesResultJson> {
     const requestJson: WealthQuantilesRequestJson = {
-      initial_wealth: userSettings.balance.toNumber(),
-      wealth_target: userSettings.goal.toNumber(),
+      initial_wealth: userSettings.balance,
+      wealth_target: userSettings.goal,
       periodic_cashflow: 100, // todo
-      investment_horizon: userSettings.horizon.toNumber(),
-      constant: userSettings.beta0.toNumber(),
-      coeff_wealth: userSettings.beta1.toNumber(),
-      coeff_t: userSettings.beta2.toNumber(),
+      investment_horizon: userSettings.horizon,
+      constant: userSettings.beta0,
+      coeff_wealth: userSettings.beta1,
+      coeff_t: userSettings.beta2,
       quantiles: QUANTILES
     };
 
@@ -62,13 +61,13 @@ export class DynamicAssetmixOptimizerHttpService {
 
   private createTerminalWealthRequest(userSettings: UserSetttings) {
     return {
-      initial_wealth: userSettings.balance.toNumber(),
-      wealth_target: userSettings.goal.toNumber(),
+      initial_wealth: userSettings.balance,
+      wealth_target: userSettings.goal,
       periodic_cashflow: 100, // todo
-      investment_horizon: userSettings.horizon.toNumber(),
-      constant: userSettings.beta0.toNumber(),
-      coeff_wealth: userSettings.beta1.toNumber(),
-      coeff_t: userSettings.beta2.toNumber()
+      investment_horizon: userSettings.horizon,
+      constant: userSettings.beta0,
+      coeff_wealth: userSettings.beta1,
+      coeff_t: userSettings.beta2
     };
   }
 }
