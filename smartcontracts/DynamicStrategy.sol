@@ -130,10 +130,10 @@ contract DynamicStrategy  {
 		int256 wealth = usersData[user].balance;
 
 		int256 fstock = beta0 + beta1*wealth + beta2*int256(currentYear- startYear);
+		if(fstock < 0) fstock = 0;
+		if(fstock > 1000000000) fstock = 1000000000;
+		
 		int256 fbonds = 1000000000 - fstock;		
-
-		if(fstock < 0) throw;
-		if(fbonds < 0) throw;
 		if(fstock+fbonds != 1000000000) throw;
 
 		usersData[user].currentStock = fstock;
