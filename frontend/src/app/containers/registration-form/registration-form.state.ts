@@ -6,7 +6,7 @@ export interface RegistrationFormStateModel {
       initialDeposit: number;
       annualDeposit: number;
       targetWealth: number;
-      targetYear: number;
+      targetYear: string;
     };
     dirty: boolean;
     status: string;
@@ -18,7 +18,12 @@ export interface RegistrationFormStateModel {
   name: 'registrationstate',
   defaults: {
     registrationForm: {
-      model: undefined,
+      model: {
+        initialDeposit: 10000,
+        annualDeposit: 0,
+        targetWealth: 60000,
+        targetYear: '2058'
+      },
       dirty: false,
       status: '',
       errors: {}

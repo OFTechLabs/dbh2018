@@ -3,6 +3,7 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Register } from '../../model/registration.action';
 import 'rxjs/add/operator/map';
+import { UpdateFormValue } from '@ngxs/form-plugin';
 
 @Component({
   selector: 'app-registration-form',
@@ -14,7 +15,7 @@ export class RegistrationFormComponent implements OnInit {
     initialDeposit: 10000,
     annualDeposit: 0,
     targetWealth: 60000,
-    targetYear: 2058
+    targetYear: '2058'
   });
 
   years: number[] = [];

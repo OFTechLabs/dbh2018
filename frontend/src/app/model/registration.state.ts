@@ -24,7 +24,13 @@ export class RegistrationState {
   registerUser({ getState, setState }: StateContext<RegistrationStateModel>, action: Register) {
     const currentState = getState();
     const formModel = action.payload.registrationForm.model;
-    const newUserModel = new RegistrationUserModel(currentState.model.description, formModel.initialDeposit, formModel.annualDeposit, formModel.targetWealth, formModel.targetYear);
+    const newUserModel = new RegistrationUserModel(
+      currentState.model.description,
+      formModel.initialDeposit,
+      formModel.annualDeposit,
+      formModel.targetWealth,
+      Number.parseFloat(formModel.targetYear)
+    );
     setState(new RegistrationStateModel(newUserModel, RegistrationPageStatus.CALCULATION_ASSETMIX, [], ''));
     this.store.dispatch(new OptimizeAllocationStrategy());
   }
