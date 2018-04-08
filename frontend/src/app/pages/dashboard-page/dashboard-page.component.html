@@ -44,3 +44,10 @@
     <mat-icon>refresh</mat-icon>
   </div>
 </div>
+
+<mat-card *ngIf="(dashboard$ | async).loading">
+  <mat-card-content>
+    <app-loading imageUrl="./assets/Dr Nudge calculate.png" [width]="350"
+                 description="Retreiving your data..."></app-loading>
+  </mat-card-content>
+</mat-card>

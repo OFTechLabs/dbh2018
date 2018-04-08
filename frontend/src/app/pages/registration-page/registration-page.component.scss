@@ -12,6 +12,22 @@ h1 {
 
 .form-header {
   text-align: center;
-  width: 50%;
   padding-bottom: 20px;
+}
+
+.logo {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.container {
+  display: flex;
+}
+
+.container > div {
+  flex: 0 0 50%;
+}
+
+.right {
+  text-align: center;
 }

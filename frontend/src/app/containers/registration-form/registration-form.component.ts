@@ -3,7 +3,6 @@ import { FormBuilder } from '@angular/forms';
 import { Store } from '@ngxs/store';
 import { Register } from '../../model/registration.action';
 import 'rxjs/add/operator/map';
-import { UpdateFormValue } from '@ngxs/form-plugin';
 
 @Component({
   selector: 'app-registration-form',

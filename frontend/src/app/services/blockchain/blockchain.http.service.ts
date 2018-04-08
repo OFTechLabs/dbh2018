@@ -54,11 +54,11 @@ export class BlockchainHttpService {
 
   public async settings(address1: string): Promise<UserSetttings> {
     await this.sleep();
-    const balanceHistory = <number[]>await this.doApiCallReturnArray('getBalanceHistory');
+    let balanceHistory = <number[]>await this.doApiCallReturnArray('getBalanceHistory');
     await this.sleep();
     const currentYear = <number>await this.doApiCallReturnFirstResult('getCurrentYear');
     await this.sleep();
-    const yearHistory = <number[]>await this.doApiCallReturnArray('getYearHistory');
+    let yearHistory = <number[]>await this.doApiCallReturnArray('getYearHistory');
     await this.sleep();
     let stockHistory = <number[]>await this.doApiCallReturnArray('getStockHistory');
     await this.sleep();
@@ -66,10 +66,15 @@ export class BlockchainHttpService {
     await this.sleep();
     const userAllocationInStock = <number>await this.doApiCallReturnFirstResult('getUserAllocation') / BILLION_FRACTION;
     await this.sleep();
-    const userAllocation = <number[]>await this.doApiCallReturnArray('getUserAllocation');
+    const userAllocation = <number[]>await this.doApiCallReturnArray('getUserData');
 
     stockHistory = stockHistory.map(val => val / BILLION_FRACTION);
     bondHistory = bondHistory.map(val => val / BILLION_FRACTION);
+
+    stockHistory = stockHistory.filter(val => val > 0);
+    bondHistory = bondHistory.filter(val => val > 0);
+    yearHistory = yearHistory.filter(val => val > 0);
+    balanceHistory = balanceHistory.filter(val => val > 0);
 
     return {
       referenceAddress: address1,
