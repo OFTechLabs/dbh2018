@@ -14,7 +14,7 @@ contract DynamicStrategy  {
     	uint256[100] yearHistory;
 
     	int256 goal;	
-    	int256 horizon;
+    	uint256 horizon;
     	
     	int256 beta0;
     	int256 beta1;
@@ -64,8 +64,29 @@ contract DynamicStrategy  {
 	function getStockHistory(address user) public returns (int256[100]) {
 	    return usersData[user].stockHistory;
 	}
+	
+	function getTotalBalance() public returns (int256) {
+	    return total_balance;
+	}
+	
+	function getTotalUsers() public returns (uint256) {
+	    return total_users;
+	}
+	
+	function getCurrentYear() public returns (uint256) {
+	    return currentYear;
+	}
+	
+	function getUserData(address user) returns (int256, int256, uint256, uint256, uint256) {
+	    return (usersData[user].balance, usersData[user].goal, usersData[user].startYear, 
+	    usersData[user].elapsedYears, usersData[user].horizon);
+	}
+	
+	function getUserAllocation(address user) returns (int256, int256){
+	    return (usersData[user].currentStock, usersData[user].currentBond);
+	}
 
-	function subscribe(int256 balance, int256 goal, int256 horizon, int256 beta0, int256 beta1, int256 beta2) public returns(bool) {		
+	function subscribe(int256 balance, int256 goal, uint256 horizon, int256 beta0, int256 beta1, int256 beta2) public returns(bool) {		
 	    if(usersData[msg.sender].referenceAddress != address(0)) throw;
 	    
 	    users.push(msg.sender);
