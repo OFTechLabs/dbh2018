@@ -29,7 +29,13 @@ export class BlockchainHttpService {
       args: { beta2: beta2, balance: amount, horizon: horizon, beta0: beta0, beta1: beta1, goal: goal }
     };
 
-    return this.http.post<string>(url, req).toPromise();
+    return this.http
+      .post<string>(url, req, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .toPromise();
   }
 
   public async settings(address1: string): Promise<UserSetttings> {
@@ -60,7 +66,13 @@ export class BlockchainHttpService {
 
   private async doApiCall(methodName: string) {
     const req = this.getRequestJsonForMethod(methodName);
-    const val: Response = await this.http.post<Response>(url, req).toPromise();
+    const val: Response = await this.http
+      .post<Response>(url, req, {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      })
+      .toPromise();
     return val.data.contents[0];
   }
 
