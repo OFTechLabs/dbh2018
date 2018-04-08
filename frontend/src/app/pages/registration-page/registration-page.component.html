@@ -1,0 +1,87 @@
+<div class="logo" *ngIf="(status$ | async) === registationPageStatusses.WELCOME">
+  <img src="./assets/DR NUDGE APP LOGO.png"/>
+</div>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.WELCOME">
+  <mat-card-content>
+    <h1>What do you want to have when you retire?</h1>
+    <div class="goal-container">
+      <app-image-hover
+        matTooltip="Retirement"
+        [matTooltipPosition]="'below'"
+        imageUrl="./assets/retirement-icon.png" imageUrlHover="./assets/retirement-icon-hover.png"
+        (click)="selectGoal('Retirement')"></app-image-hover>
+      <app-image-hover
+        matTooltip="House"
+        [matTooltipPosition]="'below'"
+        imageUrl="./assets/house-icon.png" imageUrlHover="./assets/house-icon-hover.png"
+        (click)="selectGoal('House')"></app-image-hover>
+      <app-image-hover
+        matTooltip="Boat"
+        [matTooltipPosition]="'below'"
+        imageUrl="./assets/boat-icon.png" imageUrlHover="./assets/boat-icon-hover.png"
+        (click)="selectGoal('Boat')"></app-image-hover>
+      <app-image-hover
+        matTooltip="Car"
+        [matTooltipPosition]="'below'"
+        imageUrl="./assets/car-ride.png" imageUrlHover="./assets/car-ride-hover.png"
+        (click)="selectGoal('Car')"></app-image-hover>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.FORM">
+  <mat-card-content>
+    <div class="container">
+      <div class="left">
+        <div class="form-header">
+          <div>
+            <app-goal-image [goalDescription]="(registrationState$ | async)?.model.description"></app-goal-image>
+          </div>
+          <h1>Please enter more information to reach your goal</h1>
+        </div>
+        <app-registration-form></app-registration-form>
+      </div>
+      <div class="right">
+        <img src="./assets/dr nudge confirm contract.png" width="340" alt="">
+      </div>
+    </div>
+
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CALCULATION_ASSETMIX">
+  <mat-card-content>
+    <app-loading imageUrl="./assets/Dr Nudge calculate.png" [width]="350"
+                 description="Calculation optimal asset allocation..."></app-loading>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CREATING_CONTRACT">
+  <mat-card-content>
+    <app-loading imageUrl="./assets/Dr Nudge calculate.png" [width]="350"
+                 description=" Creating smart contract with optimal allocation..."></app-loading>
+  </mat-card-content>
+</mat-card>
+
+<mat-card *ngIf="(status$ | async) === registationPageStatusses.CONFIRMATION">
+  <mat-card-content>
+    <div class="container">
+      <div class="left">
+        <div class="form-header">
+          <h1>Your contract</h1>
+        </div>
+        <app-confirmation [registrationState]="registrationState$ | async"></app-confirmation>
+      </div>
+      <div class="right">
+        <img src="./assets/dr nudge confirm contract.png" width="240" alt="">
+      </div>
+    </div>
+  </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="primary" routerLink="/dashboard">Confirm</button>
+    <button mat-button color="warn" (click)="cancel()">Cancel</button>
+  </mat-card-actions>
+</mat-card>
+
+

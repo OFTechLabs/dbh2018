@@ -1,0 +1,31 @@
+@import 'variables';
+
+@include mat-core();
+
+$candy-app-primary: mat-palette($mat-blue);
+$candy-app-accent: mat-palette($mat-orange);
+$candy-app-warn: mat-palette($mat-red);
+
+$candy-app-theme: mat-light-theme($candy-app-primary, $candy-app-accent, $candy-app-warn);
+
+@include angular-material-theme($candy-app-theme);
+
+mat-card {
+  margin-bottom: $default-card-spacing;
+  border-radius: 10px !important;
+}
+
+.main-section {
+  background: #ffffff url('./assets/bg.jpg') no-repeat center center fixed;
+  background-size: cover;
+}
+
+h1,
+h2 {
+  color: $ortec-blue;
+}
+
+mat-toolbar {
+  min-height: 80px;
+  max-height: 80px;
+}

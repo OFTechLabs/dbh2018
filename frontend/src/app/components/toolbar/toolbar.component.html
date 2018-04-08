@@ -1,0 +1,36 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button [matMenuTriggerFor]="menu2">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+  <mat-menu #menu2="matMenu">
+    <button mat-menu-item routerLink="/dashboard">
+      <mat-icon>insert_chart</mat-icon>
+      <span>Dashboard</span>
+    </button>
+
+    <button mat-menu-item routerLink="/registration">
+      <mat-icon>input</mat-icon>
+      <span>Registration</span>
+    </button>
+  </mat-menu>
+
+  <span class="title">Doctor Nudge</span>
+
+  <span class="example-spacer"></span>
+
+  <button class="profile-btn" mat-button [matMenuTriggerFor]="menu">
+    <span class="profile-name">José Mourinho</span>
+    <img src="./assets/profile-picture.png" alt="profile" />
+  </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <mat-icon>person</mat-icon>
+      <span>My profile</span>
+    </button>
+    <button mat-menu-item>
+      <mat-icon>exit_to_app</mat-icon>
+      <span>Logout</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>

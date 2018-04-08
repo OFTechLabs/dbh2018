@@ -1,0 +1,22 @@
+@import '../node_modules/@angular/material/_theming.scss';
+
+/*
+    #Layout
+ */
+$default-card-spacing: 16px;
+
+/*
+    #Colors
+ */
+$ortec-blue: #2196f3;
+$ortec-green: #87bc41;
+$ortec-orange: #f58025;
+$ortec-purple: #6a75a1;
+
+$error-red: #f44336;
+
+$primary-700: map_get($mat-blue, 700);
+
+$material-gray: rgba(0, 0, 0, 0.38);
+
+$primary-font: 'Roboto', sans-serif;

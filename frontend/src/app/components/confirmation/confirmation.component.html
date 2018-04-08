@@ -1,0 +1,20 @@
+<div class="item">
+  <label>Goal</label>
+  <div>{{registrationState.model.description}}</div>
+</div>
+<div class="item">
+  <label>Target wealth</label>
+  <div>{{registrationState.model.targetWealth | currency:'EUR':'symbol':'1.0-0'}}</div>
+</div>
+<div class="item">
+  <label>Target year</label>
+  <div>{{registrationState.model.targetYear}}</div>
+</div>
+<div class="item">
+  <label>Initial deposit</label>
+  <div>{{registrationState.model.initialWealth | currency:'EUR':'symbol':'1.0-0'}}</div>
+</div>
+<div class="item">
+  <label>Annual deposit</label>
+  <div>{{registrationState.model.annualContribution | currency:'EUR':'symbol':'1.0-0'}}</div>
+</div>

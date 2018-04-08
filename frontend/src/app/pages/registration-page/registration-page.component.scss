@@ -1,0 +1,33 @@
+.goal-container {
+  text-align: center;
+}
+
+app-image-hover {
+  cursor: pointer;
+}
+
+h1 {
+  text-align: center;
+}
+
+.form-header {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.logo {
+  text-align: center;
+  padding-bottom: 20px;
+}
+
+.container {
+  display: flex;
+}
+
+.container > div {
+  flex: 0 0 50%;
+}
+
+.right {
+  text-align: center;
+}
