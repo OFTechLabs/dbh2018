@@ -51,17 +51,21 @@ export class BlockchainHttpService {
   }
 
   public async settings(address1: string): Promise<UserSetttings> {
-    const balanceHistory = <number[]>await this.doApiCallReturnFirstResult('getBalanceHistory');
+    let balanceHistory = <number[]>await this.doApiCallReturnFirstResult('getBalanceHistory');
     const currentYear = <number>await this.doApiCallReturnFirstResult('getCurrentYear');
-    const yearHistory = <number[]>await this.doApiCallReturnFirstResult('getYearHistory');
+    let yearHistory = <number[]>await this.doApiCallReturnFirstResult('getYearHistory');
     let stockHistory = <number[]>await this.doApiCallReturnFirstResult('getStockHistory');
     let bondHistory = <number[]>await this.doApiCallReturnFirstResult('getBondHistory');
     const userAllocationInStock = <number>await this.doApiCallReturnFirstResult('getUserAllocation') / BILLION_FRACTION;
-
     const userAllocation = <number[]>await this.doApiCallReturnArray('getUserAllocation');
 
     stockHistory = stockHistory.map(val => val / BILLION_FRACTION);
     bondHistory = bondHistory.map(val => val / BILLION_FRACTION);
+
+    stockHistory = stockHistory.filter(val => val > 0);
+    bondHistory = bondHistory.filter(val => val > 0);
+    yearHistory = yearHistory.filter(val => val > 0);
+    balanceHistory = balanceHistory.filter(val => val > 0);
 
     return {
       referenceAddress: address1,
