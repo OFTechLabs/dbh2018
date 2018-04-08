@@ -40,9 +40,7 @@
     </mat-card-content>
   </mat-card>
 
-  <div class="refresh">
-    <mat-icon>refresh</mat-icon>
-  </div>
+
 </div>
 
 <mat-card *ngIf="(dashboard$ | async).loading">
@@ -51,3 +49,7 @@
                  description="Retreiving your data..."></app-loading>
   </mat-card-content>
 </mat-card>
+
+<div class="refresh" (click)="refresh()">
+  <button mat-raised-button><mat-icon>refresh</mat-icon></button>
+</div>

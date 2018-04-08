@@ -19,6 +19,14 @@ export class DashboardPageComponent implements OnInit {
   constructor(private store: Store) {}
 
   ngOnInit() {
+    this.loadData();
+  }
+
+  refresh() {
+    this.loadData();
+  }
+
+  private loadData() {
     this.store
       .selectOnce(state => state.registration)
       .map(state => this.store.dispatch(new LoadDashboard(state)))
